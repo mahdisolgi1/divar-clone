@@ -3,7 +3,7 @@ import Ad from "../_components/Ad";
 
 const page: FC = () => {
   return (
-    <div className=" mt-28">
+    <div>
       <Ad />
     </div>
   );
