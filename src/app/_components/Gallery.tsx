@@ -1,9 +1,64 @@
 import Image from "next/image";
-import { FC } from "react";
+import React, { FC } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdOutlineHomeWork } from "react-icons/md";
 import AdInGallery from "./AdInGallery";
+import {
+  PiCarLight,
+  PiOfficeChairBold,
+  PiPaintBrushBroadLight,
+  PiToolboxLight,
+} from "react-icons/pi";
+import { CgSmartphone } from "react-icons/cg";
+import { BsLamp } from "react-icons/bs";
+import { FiWatch } from "react-icons/fi";
+import { LuDices } from "react-icons/lu";
+import { HiOutlineUsers } from "react-icons/hi";
+
+const categories = [
+  {
+    name: "املاک",
+    icon: <MdOutlineHomeWork className="text-black-secondary text-xl" />,
+  },
+  {
+    name: "وسایل نقلیه",
+    icon: <PiCarLight className="text-black-primary  text-xl" />,
+  },
+  {
+    name: "کالای دیجیتال",
+    icon: <CgSmartphone className="text-black-secondary text-xl" />,
+  },
+  {
+    name: "خانه و آشپزخانه",
+    icon: <BsLamp className="text-black-primary  text-xl" />,
+  },
+  {
+    name: "خدمات",
+    icon: <PiPaintBrushBroadLight className="text-black-primary  text-xl" />,
+  },
+  {
+    name: "وسایل شخصی",
+    icon: <FiWatch className="text-black-secondary text-xl" />,
+  },
+  {
+    name: "سرگرمی و فراغت",
+    icon: <LuDices className="text-black-secondary text-xl" />,
+  },
+  {
+    name: "اجتماعی",
+    icon: <HiOutlineUsers className="text-black-secondary text-xl" />,
+  },
+  {
+    name: "تجهیزات و صنعتی",
+    icon: <PiOfficeChairBold className="text-black-secondary text-xl" />,
+  },
+  {
+    name: "استخدام و کاریابی",
+    icon: <PiToolboxLight className="text-black-primary  text-xl" />,
+  },
+];
+
 const Gallery: FC = () => {
   return (
     <section>
@@ -20,45 +75,18 @@ const Gallery: FC = () => {
             <span className=" text-[0.875rem] text-xs text-black-primary">
               دسته ها
             </span>
-            <span className=" text-[0.875rem]  leading-8 text-black-secondary text-right">
-              املاک
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              وسایل نقلیه
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              کالای دیجیتال
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              خانه و آشپزخانه
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              خدمات
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              وسایل شخصی
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              سرگرمی و فراغت
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              اجتماعی
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              تجهیزات و صنعتی
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              استخدام و کاریابی
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              استخدام و کاریابی
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              استخدام و کاریابی
-            </span>
-            <span className=" text-[0.875rem] text-black-secondary text-right">
-              استخدام و کاریابی
-            </span>
+
+            {categories.map((category) => (
+              <div
+                key={category.name}
+                className="flex justify-center items-center gap-2"
+              >
+                <span className="text-[0.875rem] leading-8 text-black-secondary text-right">
+                  {category.name}
+                </span>
+                {category.icon}
+              </div>
+            ))}
           </div>
           <div>
             <div className="text-black-primary border-y w-full border-[#dbdbe4] p-4 text-right self-end flex justify-end items-center font-medium gap-2">
