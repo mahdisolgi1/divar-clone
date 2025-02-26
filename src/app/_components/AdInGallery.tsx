@@ -3,30 +3,17 @@ import Image from "next/image";
 import { FC, useState, useEffect } from "react";
 import { FiMessageCircle } from "react-icons/fi";
 import { getAds } from "../_lib/data-service";
-import { useRouter } from "next/navigation";
-interface AdProps {
-  ad: {
-    id: number;
-    created_at: string;
-    title: string;
-    status: string;
-    price: number;
-
-    place: string;
-    img1: string | null;
-  };
-}
+import { Ad } from "../_types/modalTypes";
+import Link from "next/link";
 
 const AdInGallery: FC = () => {
-  const [ads, setAds] = useState<AdProps["ad"][]>([]);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const [ads, setAds] = useState<Ad[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchAds = async () => {
       try {
         const fetchedAds = await getAds();
-
         console.log("Fetched Ads:", fetchedAds);
         if (Array.isArray(fetchedAds)) {
           setAds(fetchedAds);
@@ -43,23 +30,18 @@ const AdInGallery: FC = () => {
     fetchAds();
   }, []);
 
-  console.log(ads);
-  const handleClick = (id: number) => {
-    router.push(`/${id.toString()}`);
-  };
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  console.log(ads);
   return (
     <div className="ads-gallery">
       {ads.length === 0 ? (
         <p>No ads available.</p>
       ) : (
         ads.map((ad) => (
-          <div
-            onClick={() => handleClick(ad.id)}
+          <Link
+            href={`/${ad.id}`}
             key={ad.id}
             className="flex cursor-pointer p-4 justify-between border border-spacing-1"
           >
@@ -101,7 +83,7 @@ const AdInGallery: FC = () => {
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))
       )}
     </div>
