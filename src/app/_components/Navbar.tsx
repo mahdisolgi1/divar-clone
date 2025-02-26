@@ -1,5 +1,7 @@
+"use client";
 import { Button } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { CiLocationOn, CiUser } from "react-icons/ci";
 import { FiMessageCircle } from "react-icons/fi";
@@ -13,13 +15,15 @@ const Navbar: FC = () => {
       <header className=" z-50 border-b  flex flex-row-reverse fixed items-center justify-around py-4 ab top-0 w-full bg-white text-#000 text-base">
         <div className="flex items-center flex-row-reverse gap-4">
           <div className="flex items-center flex-row-reverse ">
-            <Image
-              src="/images/divar.svg"
-              width={200}
-              className="hidden lg:block ml-2 cursor-pointer  h-12 w-12"
-              height={200}
-              alt="divar icon"
-            />
+            <Link href="/">
+              <Image
+                src="/images/divar.svg"
+                width={200}
+                className="hidden lg:block ml-2 cursor-pointer  h-12 w-12"
+                height={200}
+                alt="divar icon"
+              />
+            </Link>
             <hr
               className=" h-6 w-px mx-2 hidden lg:block bg-[#dbdbe4]"
               role="presentation"
@@ -93,13 +97,15 @@ const Navbar: FC = () => {
             <GrSupport className="text-lg" />
             <span className="text-inherit text-base font-medium">پشتیبانی</span>
           </Button>
-          <Button
-            variant="contained"
-            sx={{ background: "#a62626" }}
-            className="hover:bg-[#be3737] hover:shadow-none  whitespace-nowrap"
-          >
-            ثبت آگهی
-          </Button>
+          <Link href="/create-Ad">
+            <Button
+              variant="contained"
+              sx={{ background: "#a62626" }}
+              className="hover:bg-[#be3737] hover:shadow-none  whitespace-nowrap"
+            >
+              ثبت آگهی
+            </Button>
+          </Link>
         </div>
       </header>
     </>
