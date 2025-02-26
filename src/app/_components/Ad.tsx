@@ -19,31 +19,21 @@ import { getAd } from "../_lib/data-service";
 import { useParams } from "next/navigation";
 import { BiCopy } from "react-icons/bi";
 import Image from "next/image";
-interface Ad {
-  id: number;
-  created_at: string;
-  title: string;
-  price: number;
-  phoneNumber: number;
-  place: string;
-  status: string;
-  openToExchange: string | null;
-  description: string;
-  img1: string | null;
-  img2: string | null;
-  img3: string | null;
-}
+import { Ad as AdInterface } from "../_types/modalTypes";
 
 const Ad: FC = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const { id } = useParams();
-  const [ad, setAd] = useState<Ad | null>(null);
+  const [ad, setAd] = useState<AdInterface | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [toggleNumber, setToggleNumber] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   async function handleCopy(phoneNumber: number) {
     try {
       await navigator.clipboard.writeText(phoneNumber?.toString());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
     } catch (err) {
       console.error("Failed to copy:", err);
     }
@@ -88,18 +78,9 @@ const Ad: FC = () => {
             <span className="text-black-hint text-xs leading-10">
               {ad.title}
             </span>
+
             <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
-            <span className="text-black-secondary text-xs">
-              فروشگاه و مغازه
-            </span>
-            <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
-            <span className="text-black-secondary text-xs">
-              تجهیزات کسب‌وکار
-            </span>
-            <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
-            <span className="text-black-secondary text-xs">
-              تجهیزات و صنعتی
-            </span>
+            <span className="text-black-secondary text-xs">{ad.category}</span>
           </div>
           <div className="flex  justify-center items-center flex-1 gap-5 ">
             <div className="max-w-[50%] flex flex-col  justify-center  gap-5 mr-[8.33%]">
@@ -216,14 +197,20 @@ const Ad: FC = () => {
                   <>
                     <div className="flex justify-between  pb-3 items-center ">
                       <div className="flex justify-center items-center gap-2">
-                        <span
-                          className="p-2 flex justify-center cursor-pointer items-center  hover:bg-black-light-100  rounded-full"
-                          onClick={() => handleCopy(ad.phoneNumber)}
+                        <Tooltip
+                          title="! کپی شد"
+                          placement="top"
+                          arrow
+                          open={copied}
+                          disableHoverListener
                         >
-                          <Tooltip title="copy" placement="top" arrow>
+                          <span
+                            className="p-2 flex justify-center cursor-pointer items-center  hover:bg-black-light-100  rounded-full"
+                            onClick={() => handleCopy(ad.phoneNumber)}
+                          >
                             <BiCopy className="text-black-secondary text-xl" />
-                          </Tooltip>
-                        </span>
+                          </span>
+                        </Tooltip>
                         <a
                           className="text-brand hover:text-[#be3737]  text-base  "
                           href={`tel:0${ad.phoneNumber}`}
