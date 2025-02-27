@@ -20,11 +20,12 @@ import { useParams } from "next/navigation";
 import { BiCopy } from "react-icons/bi";
 import Image from "next/image";
 import { Ad as AdInterface } from "../_types/modalTypes";
+import PersianRelativeTime from "./PersianRelativeTime";
 
 const Ad: FC = () => {
+  const [ad, setAd] = useState<AdInterface | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const { id } = useParams();
-  const [ad, setAd] = useState<AdInterface | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [toggleNumber, setToggleNumber] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
@@ -58,7 +59,6 @@ const Ad: FC = () => {
 
     fetchAd();
   }, [id]);
-  console.log(ad);
   const images = [ad?.img1];
   if (ad?.img2) images.push(ad.img2);
   if (ad?.img3) images.push(ad.img3);
@@ -153,9 +153,12 @@ const Ad: FC = () => {
                 <h1 className="text-xl font-medium text-black-primary ">
                   {ad.title}
                 </h1>
-                <p className="text-[0.875rem] text-black-secondary">
-                  {ad.place}
-                </p>
+                <div className=" flex text-right  justify-end items-center gap-1  ">
+                  <p className="text-[0.875rem] text-black-secondary">
+                    {ad.place}
+                  </p>
+                  <PersianRelativeTime createdAt={ad.created_at} />
+                </div>
                 <div className="flex border-y justify-between items-center py-3">
                   <MdOutlineKeyboardArrowLeft className="text-black-hint w-10 text-lg cursor-pointer" />
                   <span className="text-black-primary text-base ">
