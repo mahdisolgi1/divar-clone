@@ -14,7 +14,6 @@ const AdInGallery: FC = () => {
     const fetchAds = async () => {
       try {
         const fetchedAds = await getAds();
-        console.log("Fetched Ads:", fetchedAds);
         if (Array.isArray(fetchedAds)) {
           setAds(fetchedAds);
         } else {
@@ -35,7 +34,7 @@ const AdInGallery: FC = () => {
   }
 
   return (
-    <div className="ads-gallery">
+    <div>
       {ads.length === 0 ? (
         <p>No ads available.</p>
       ) : (
