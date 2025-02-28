@@ -7,6 +7,7 @@ export interface Ad {
   price: number;
   phoneNumber: number;
   place: string;
+  province: string;
   status: string;
   openToExchange: string | null;
   description: string;
@@ -21,5 +22,21 @@ export interface Ad {
 export interface Category {
   id: number;
   category: string;
+  created_at: string;
+}
+
+// for province
+
+export interface province {
+  id: number;
+  province: string;
+  created_at: string;
+}
+
+// for status
+
+export interface status {
+  id: number;
+  status: string;
   created_at: string;
 }
