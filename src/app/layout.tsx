@@ -5,6 +5,10 @@ import Navbar from "@/app/_components/Navbar";
 export const metadata: Metadata = {
   title: "divar",
   description: "divar online marketplace",
+  icons: {
+    icon: [{ url: "/images/divar.svg", type: "image/svg" }],
+    apple: [{ url: "/images/apple-touch-icon.png" }],
+  },
 };
 
 export default function RootLayout({
