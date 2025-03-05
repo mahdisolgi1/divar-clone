@@ -1,35 +1,11 @@
 import { useState } from "react";
+import { formatPrice } from "../_utils/formatPrice";
 
 const PriceInput: React.FC = () => {
   const [price, setPrice] = useState<string>("");
 
-  const formatPrice = (num: string): string => {
-    const persianNumbers = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-    let persianNum = "";
-    for (let i = 0; i < num.length; i++) {
-      const char = num[i];
-      if (/\d/.test(char)) {
-        persianNum += persianNumbers[parseInt(char)];
-      } else {
-        persianNum += char;
-      }
-    }
-
-    let withSeparators = "";
-    let count = 0;
-    for (let i = persianNum.length - 1; i >= 0; i--) {
-      withSeparators = persianNum[i] + withSeparators;
-      count++;
-      if (count % 3 === 0 && i !== 0) {
-        withSeparators = "٬" + withSeparators;
-      }
-    }
-
-    return withSeparators;
-  };
-
   return (
-    <div className="w-full me-auto text-right flex gap-1 flex-col">
+    <div className="w-full me-auto text-right flex gap-1 z-50 flex-col">
       <h3 className="text-base text-black-primary pr-1">قیمت</h3>
       <div className="relative">
         <input
