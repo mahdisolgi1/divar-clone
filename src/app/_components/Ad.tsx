@@ -21,7 +21,7 @@ import { BiCopy } from "react-icons/bi";
 import Image from "next/image";
 import { Ad as AdInterface } from "../_types/modalTypes";
 import PersianRelativeTime from "./PersianRelativeTime";
-import Leafnet from "./Leafnet";
+import LocationDisplayer from "./LocationDisplayer";
 import Spinner from "./Spinner";
 import { formatPrice } from "../_utils/formatPrice";
 
@@ -150,7 +150,7 @@ const Ad: FC = () => {
                 یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد
                 شد.
               </p>{" "}
-              <Leafnet lng={-73.935242} lat={40.73061} />
+              <LocationDisplayer lng={ad.longitude} lat={ad.latitude} />
             </div>
             <div className="flex flex-col gap-5 w-1/2">
               <div className="flex flex-col gap-3 justify-start">
