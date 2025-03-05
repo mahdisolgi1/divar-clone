@@ -65,7 +65,7 @@ const StatusDropDown: FC = () => {
 
   return (
     <div className="w-full me-auto text-right flex gap-1 flex-col">
-      <h3 className="text-base text-black-primary  pr-1">استان</h3>
+      <h3 className="text-base text-black-primary  pr-1">وضیعت</h3>
       <div className="relative w-full mx-auto cursor-pointer" ref={dropdownRef}>
         <div
           className="flex items-center w-full justify-between px-4 py-2 bg-white border hover:border-black-dark-100 border-black-medium-100 rounded-md cursor-pointer hover:bg-gray-50"
