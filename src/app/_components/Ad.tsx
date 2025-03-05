@@ -21,6 +21,9 @@ import { BiCopy } from "react-icons/bi";
 import Image from "next/image";
 import { Ad as AdInterface } from "../_types/modalTypes";
 import PersianRelativeTime from "./PersianRelativeTime";
+import Leafnet from "./Leafnet";
+import Spinner from "./Spinner";
+import { formatPrice } from "../_utils/formatPrice";
 
 const Ad: FC = () => {
   const [ad, setAd] = useState<AdInterface | null>(null);
@@ -66,7 +69,7 @@ const Ad: FC = () => {
   return (
     <section className="text-right md:max-w-[960px] lg:max-w-[1024px] m-auto">
       {loading ? (
-        <p>Loading...</p>
+        <Spinner />
       ) : error ? (
         <p>Error: {error}</p>
       ) : !ad ? (
@@ -74,7 +77,7 @@ const Ad: FC = () => {
       ) : (
         <>
           {" "}
-          <div className="flex justify-end gap-2 items-center">
+          <div className="flex justify-end gap-2 items-center py-4">
             <span className="text-black-hint text-xs leading-10">
               {ad.title}
             </span>
@@ -82,7 +85,7 @@ const Ad: FC = () => {
             <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
             <span className="text-black-secondary text-xs">{ad.category}</span>
           </div>
-          <div className="flex  justify-center items-center flex-1 gap-5 ">
+          <div className="flex  justify-center  flex-1 gap-5 ">
             <div className="max-w-[50%] flex flex-col  justify-center  gap-5 mr-[8.33%]">
               <div className="w-full max-w-3xl mx-auto">
                 <Swiper
@@ -146,10 +149,11 @@ const Ad: FC = () => {
               <p className="text-black-secondary text-xs">
                 یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد
                 شد.
-              </p>
+              </p>{" "}
+              <Leafnet lng={-73.935242} lat={40.73061} />
             </div>
             <div className="flex flex-col gap-5 w-1/2">
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 justify-start">
                 <h1 className="text-xl font-medium text-black-primary ">
                   {ad.title}
                 </h1>
@@ -181,7 +185,7 @@ const Ad: FC = () => {
                   <Button
                     variant="contained"
                     sx={{ background: "white", color: " rgba(0, 0, 0, 0.56)" }}
-                    className="hover:bg-black/5 text-black-secondary hover:shadow-none  whitespace-nowrap bg-transparent text-content-primary"
+                    className="hover:bg-black/5  text-black-secondary hover:shadow-none  whitespace-nowrap bg-transparent text-content-primary"
                   >
                     چت
                   </Button>
@@ -245,7 +249,6 @@ const Ad: FC = () => {
                 )}
                 <div className="flex justify-between border-b pb-3 items-center ">
                   <span className="text-black-primary text-base ">
-                    {" "}
                     {ad.status}
                   </span>
                   <span className="text-black-secondary text-base">وضعیت</span>
@@ -253,7 +256,7 @@ const Ad: FC = () => {
                 <div className="flex justify-between border-b pb-3 items-center ">
                   <span className="text-black-primary text-base ">
                     {" "}
-                    {ad.openToExchange}
+                    {ad.openToExchange ? "هستم" : "نیستم"}
                   </span>
                   <span className="text-black-secondary text-base">
                     مایل به معاوضه
@@ -261,7 +264,7 @@ const Ad: FC = () => {
                 </div>
                 <div className="flex justify-between border-b pb-3 items-center ">
                   <span className="text-black-primary text-base ">
-                    {ad.price}
+                    {formatPrice(ad.price.toString())}
                   </span>
                   <span className="text-black-secondary text-base">قیمت</span>
                 </div>
