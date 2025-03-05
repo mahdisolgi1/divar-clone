@@ -14,6 +14,8 @@ export interface Ad {
   img1: string | null;
   img2: string | null;
   img3: string | null;
+  longitude: number;
+  latitude: number;
   category: string;
 }
 
@@ -31,6 +33,8 @@ export interface province {
   id: number;
   province: string;
   created_at: string;
+  longitude: number;
+  latitude: number;
 }
 
 // for status
