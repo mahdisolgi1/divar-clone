@@ -4,6 +4,7 @@ import { Category } from "../_types/modalTypes";
 import { getCates } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
+import Spinner from "./Spinner";
 
 const CatDropdown: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -55,7 +56,11 @@ const CatDropdown: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center w-full items-center  ">
+        <Spinner />
+      </div>
+    );
   }
 
   if (error) {

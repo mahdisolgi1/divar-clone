@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { status } from "../_types/modalTypes";
 import { getStatuses } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
+import Spinner from "./Spinner";
 
 const StatusDropDown: React.FC = () => {
   const [statuses, setStatus] = useState<status[]>([]);
@@ -56,11 +57,15 @@ const StatusDropDown: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="flex justify-center items-center">Loading...</div>;
+    return <Spinner />;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="flex justify-center w-full items-center  ">
+        <Spinner />
+      </div>
+    );
   }
 
   return (

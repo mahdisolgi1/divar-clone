@@ -4,6 +4,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import { TiImage } from "react-icons/ti";
 import { MdDelete } from "react-icons/md";
 import { uploadImage } from "../_lib/data-service";
+import Spinner from "./Spinner";
 
 const ImageUploader: React.FC = () => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
@@ -63,7 +64,7 @@ const ImageUploader: React.FC = () => {
             onClick={handlePlaceholderClick}
           >
             {uploading ? (
-              <span className="text-xs text-gray-500">Uploading...</span>
+              <Spinner />
             ) : (
               <div className="flex flex-col items-center">
                 <TiImage className="text-4xl text-black-medium-200" />

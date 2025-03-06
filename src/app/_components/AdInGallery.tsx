@@ -6,6 +6,7 @@ import { getAds } from "../_lib/data-service";
 import { Ad } from "../_types/modalTypes";
 import Link from "next/link";
 import { formatPrice } from "../_utils/formatPrice";
+import Spinner from "./Spinner";
 
 const AdInGallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
@@ -31,7 +32,11 @@ const AdInGallery: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center w-full items-center  col-start-2">
+        <Spinner />
+      </div>
+    );
   }
   console.log(ads);
   return (

@@ -3,6 +3,7 @@ import { province } from "../_types/modalTypes";
 import { getProvinces } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import LeafletMap from "./LocationGetterLeafnet";
+import Spinner from "./Spinner";
 
 const ProvinceDropDown: React.FC = () => {
   const [provinces, setProvinces] = useState<province[]>([]);
@@ -60,7 +61,11 @@ const ProvinceDropDown: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center w-full items-center  ">
+        <Spinner />
+      </div>
+    );
   }
 
   if (error) {

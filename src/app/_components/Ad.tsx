@@ -69,7 +69,9 @@ const Ad: React.FC = () => {
   return (
     <section className="text-right md:max-w-[960px] lg:max-w-[1024px] m-auto">
       {loading ? (
-        <Spinner />
+        <div className="flex justify-center w-full h-[75vh] items-center">
+          <Spinner />
+        </div>
       ) : error ? (
         <p>Error: {error}</p>
       ) : !ad ? (
