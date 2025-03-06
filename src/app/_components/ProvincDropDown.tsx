@@ -2,6 +2,7 @@ import { FC, useEffect, useState, useRef } from "react";
 import { province } from "../_types/modalTypes";
 import { getProvinces } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
+import LeafletMap from "./LocationGetterLeafnet";
 
 const ProvinceDropDown: FC = () => {
   const [provinces, setProvinces] = useState<province[]>([]);
@@ -50,6 +51,7 @@ const ProvinceDropDown: FC = () => {
 
   const handleProvinceSelect = (province: province) => {
     setSelectedProvince(province);
+    console.log(selectedProvince);
     setIsOpen(false);
   };
 
@@ -67,8 +69,11 @@ const ProvinceDropDown: FC = () => {
 
   return (
     <div className="w-full me-auto text-right flex gap-1 flex-col">
-      <h3 className="text-base text-black-primary  pr-1">استان</h3>
-      <div className="relative w-full mx-auto cursor-pointer" ref={dropdownRef}>
+      <h3 className="text-base text-black-primary pr-1">استان</h3>
+      <div
+        className="z-[1000] relative w-full mx-auto cursor-pointer"
+        ref={dropdownRef}
+      >
         <div
           className="flex items-center w-full justify-between px-4 py-2 bg-white border hover:border-black-dark-100 border-black-medium-100 rounded-md cursor-pointer hover:bg-gray-50"
           onClick={toggleDropdown}
@@ -86,7 +91,7 @@ const ProvinceDropDown: FC = () => {
         </div>
 
         {isOpen && (
-          <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+          <ul className="absolute z-[500] mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
             {provinces.map((province) => (
               <li
                 key={province.id}
@@ -99,6 +104,14 @@ const ProvinceDropDown: FC = () => {
           </ul>
         )}
       </div>
+      {selectedProvince && (
+        <LeafletMap
+          selectedProvince={[
+            selectedProvince.longitude,
+            selectedProvince.latitude,
+          ]}
+        />
+      )}
     </div>
   );
 };
