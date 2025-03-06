@@ -24,7 +24,7 @@ import StatusDropDown from "./StatusDropDown";
 import PhoneInput from "./NumInput";
 import { Button } from "@mui/material";
 
-const iconMap: Record<string, FC<{ className?: string }>> = {
+const iconMap: Record<string, React.FC<{ className?: string }>> = {
   املاک: MdOutlineHomeWork,
   "وسایل نقلیه": PiCarLight,
   "کالای دیجیتال": CgSmartphone,

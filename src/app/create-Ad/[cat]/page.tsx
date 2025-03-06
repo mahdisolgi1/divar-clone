@@ -1,9 +1,9 @@
-import Ad from "../_components/Ad";
+import CreateAd from "@/app/_components/CreateAd";
 
 const page: React.FC = () => {
   return (
     <div>
-      <Ad />
+      <CreateAd />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import Gallery from "@/app/_components/Gallery";
-import { FC } from "react";
 
-const page: FC = () => {
+const page: React.FC = () => {
   return (
     <div className=" mt-28 ">
       <Gallery />

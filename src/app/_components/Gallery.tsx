@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React, { FC } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import { MdKeyboardArrowDown, MdOutlineHomeWork } from "react-icons/md";
@@ -59,7 +58,7 @@ const categories = [
   },
 ];
 
-const Gallery: FC = () => {
+const Gallery: React.FC = () => {
   return (
     <section>
       <div className="flex justify-center ">

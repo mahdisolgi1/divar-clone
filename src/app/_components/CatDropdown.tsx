@@ -1,11 +1,11 @@
 "use client";
-import { FC, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Category } from "../_types/modalTypes";
 import { getCates } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
 
-const CatDropdown: FC = () => {
+const CatDropdown: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null

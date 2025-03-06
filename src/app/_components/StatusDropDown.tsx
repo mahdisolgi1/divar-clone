@@ -1,9 +1,9 @@
-import { FC, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { status } from "../_types/modalTypes";
 import { getStatuses } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 
-const StatusDropDown: FC = () => {
+const StatusDropDown: React.FC = () => {
   const [statuses, setStatus] = useState<status[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<status | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -56,7 +56,7 @@ const StatusDropDown: FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center items-center">Loading...</div>;
   }
 
   if (error) {

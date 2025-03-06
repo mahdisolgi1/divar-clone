@@ -1,7 +1,6 @@
-import { FC } from "react";
 import CatDropdown from "./CatDropdown";
 
-const AdCat: FC = () => {
+const AdCat: React.FC = () => {
   return (
     <div className="flex justify-center items-end gap-5 w-full max-w-[600px] mx-auto flex-col">
       <h2 className="text-xl font-medium text-gray">ثبت آگهی</h2>

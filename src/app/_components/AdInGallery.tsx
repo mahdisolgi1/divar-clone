@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FiMessageCircle } from "react-icons/fi";
 import { getAds } from "../_lib/data-service";
 import { Ad } from "../_types/modalTypes";
 import Link from "next/link";
+import { formatPrice } from "../_utils/formatPrice";
 
-const AdInGallery: FC = () => {
+const AdInGallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -32,7 +33,7 @@ const AdInGallery: FC = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  console.log(ads);
   return (
     <div>
       {ads.length === 0 ? (
@@ -45,7 +46,7 @@ const AdInGallery: FC = () => {
             className="flex cursor-pointer p-4 justify-between border border-spacing-1"
           >
             <div className="flex w-1/2 gap-1">
-              {ad.img1 && ad.img1.startsWith("http") ? (
+              {ad.img1 ? (
                 <Image
                   width={600}
                   height={300}
@@ -75,7 +76,7 @@ const AdInGallery: FC = () => {
                   {ad.status}
                 </span>
                 <span className="text-right text-black-secondary text-[0.875rem]">
-                  {ad.price}
+                  {formatPrice(ad.price.toString())}
                 </span>
                 <span className="text-right text-black-primary text-[0.875rem]">
                   {ad.place}

@@ -2,14 +2,13 @@
 import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
 import { CiLocationOn, CiUser } from "react-icons/ci";
 import { FiMessageCircle } from "react-icons/fi";
 import { GrSupport } from "react-icons/gr";
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-const Navbar: FC = () => {
+const Navbar: React.FC = () => {
   return (
     <>
       <header className=" z-50 border-b  flex flex-row-reverse fixed items-center justify-around py-4 ab top-0 w-full bg-white text-#000 text-base">

@@ -1,10 +1,10 @@
-import { FC, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { province } from "../_types/modalTypes";
 import { getProvinces } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import LeafletMap from "./LocationGetterLeafnet";
 
-const ProvinceDropDown: FC = () => {
+const ProvinceDropDown: React.FC = () => {
   const [provinces, setProvinces] = useState<province[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<province | null>(
     null

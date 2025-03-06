@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Tooltip } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
@@ -25,7 +25,7 @@ import LocationDisplayer from "./LocationDisplayer";
 import Spinner from "./Spinner";
 import { formatPrice } from "../_utils/formatPrice";
 
-const Ad: FC = () => {
+const Ad: React.FC = () => {
   const [ad, setAd] = useState<AdInterface | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const { id } = useParams();

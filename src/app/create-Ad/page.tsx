@@ -1,7 +1,6 @@
-import { FC } from "react";
 import AdCat from "../_components/AdCat";
 
-const page: FC = () => {
+const page: React.FC = () => {
   return (
     <div>
       <AdCat />
