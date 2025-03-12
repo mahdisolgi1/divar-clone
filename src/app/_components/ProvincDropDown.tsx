@@ -4,8 +4,15 @@ import { getProvinces } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import LeafletMap from "./LocationGetterLeafnet";
 import Spinner from "./Spinner";
+interface ProvinceDropDownProps {
+  onProvince: (province: string) => void;
+  onPosition: (position: [number, number]) => void;
+}
 
-const ProvinceDropDown: React.FC = () => {
+const ProvinceDropDown: React.FC<ProvinceDropDownProps> = ({
+  onPosition,
+  onProvince,
+}) => {
   const [provinces, setProvinces] = useState<province[]>([]);
   const [selectedProvince, setSelectedProvince] = useState<province | null>(
     null
@@ -52,6 +59,7 @@ const ProvinceDropDown: React.FC = () => {
 
   const handleProvinceSelect = (province: province) => {
     setSelectedProvince(province);
+    onProvince(province.province);
     console.log(selectedProvince);
     setIsOpen(false);
   };
@@ -111,6 +119,7 @@ const ProvinceDropDown: React.FC = () => {
       </div>
       {selectedProvince && (
         <LeafletMap
+          onPosition={onPosition}
           selectedProvince={[
             selectedProvince.longitude,
             selectedProvince.latitude,
