@@ -1,11 +1,5 @@
-import { useState, useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  useMapEvents,
-  useMap,
-} from "react-leaflet";
+import { useState } from "react";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -18,45 +12,43 @@ const icon = L.icon({
 
 interface MapProps {
   selectedProvince: [number, number];
+  onPosition: (position: [number, number]) => void;
 }
 
 const CenterMarker = ({
-  selectedProvince,
+  onPosition,
 }: {
-  selectedProvince: [number, number];
+  onPosition: (position: [number, number]) => void;
 }) => {
-  const [position, setPosition] = useState<[number, number]>(selectedProvince);
-  const map = useMap();
-
-  useEffect(() => {
-    map.setView(selectedProvince, map.getZoom());
-    setPosition(selectedProvince);
-  }, [selectedProvince, map]);
+  const [position, setPosition] = useState<[number, number]>([0, 0]);
 
   useMapEvents({
-    move: () => {
-      const center = map.getCenter();
-      setPosition([center.lat, center.lng]);
-      console.log(position);
+    moveend: (e) => {
+      const center = e.target.getCenter();
+      const newPosition: [number, number] = [center.lat, center.lng];
+      if (position[0] !== newPosition[0] || position[1] !== newPosition[1]) {
+        setPosition(newPosition);
+        onPosition(newPosition);
+      }
     },
   });
 
   return <Marker position={position} icon={icon} />;
 };
 
-export default function LeafletMap({ selectedProvince }: MapProps) {
+export default function LeafletMap({ selectedProvince, onPosition }: MapProps) {
   return (
     <MapContainer
       center={selectedProvince}
       zoom={12}
       zoomControl={false}
-      className="w-full h-[400px]  relative "
+      className="w-full h-[400px] relative -z-10"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
       />
-      <CenterMarker selectedProvince={selectedProvince} />
+      <CenterMarker onPosition={onPosition} />
     </MapContainer>
   );
 }
