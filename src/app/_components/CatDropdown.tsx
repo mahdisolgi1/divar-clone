@@ -108,7 +108,7 @@ const CatDropdown: React.FC = () => {
             ))}
           </ul>
         )}
-      </div>
+      </div>{" "}
     </div>
   );
 };
