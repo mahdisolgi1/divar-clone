@@ -40,22 +40,24 @@ const AdInGallery: React.FC = () => {
   }
   console.log(ads);
   return (
-    <div>
+    <>
       {ads.length === 0 ? (
-        <p>No ads available.</p>
+        <span className="text-right text-black-secondary text-[0.875rem] ">
+          No ads available.
+        </span>
       ) : (
         ads.map((ad) => (
           <Link
             href={`/${ad.id}`}
             key={ad.id}
-            className="flex cursor-pointer p-4 justify-between border border-spacing-1"
+            className="flex cursor-pointer p-4 w-[19rem] h-40 justify-between border border-spacing-1"
           >
             <div className="flex w-1/2 gap-1">
               {ad.img1 ? (
                 <Image
                   width={600}
                   height={300}
-                  className="w-5/6"
+                  className="w-5/6 "
                   src={ad.img1}
                   alt={ad.title}
                 />
@@ -72,7 +74,7 @@ const AdInGallery: React.FC = () => {
               <FiMessageCircle size={15} color="black" className="self-end" />
             </div>
 
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col  justify-between">
               <h2 className="text-right text-black-primary text-base">
                 {ad.title}
               </h2>
@@ -80,9 +82,14 @@ const AdInGallery: React.FC = () => {
                 <span className="text-right text-black-secondary text-[0.875rem]">
                   {ad.status}
                 </span>
-                <span className="text-right text-black-secondary text-[0.875rem]">
-                  {formatPrice(ad.price.toString())}
-                </span>
+                <div className="flex justify-center items-center flex-row-reverse gap-1">
+                  <span className="text-right text-black-secondary text-[0.875rem] ">
+                    {formatPrice(ad.price.toString())}
+                  </span>
+                  <span className="text-right text-black-secondary text-[0.875rem] ">
+                    تومان
+                  </span>
+                </div>
                 <span className="text-right text-black-primary text-[0.875rem]">
                   {ad.place}
                 </span>
@@ -91,7 +98,7 @@ const AdInGallery: React.FC = () => {
           </Link>
         ))
       )}
-    </div>
+    </>
   );
 };
 
