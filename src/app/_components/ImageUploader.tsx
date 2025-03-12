@@ -1,15 +1,31 @@
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { TiImage } from "react-icons/ti";
 import { MdDelete } from "react-icons/md";
 import { uploadImage } from "../_lib/data-service";
 import Spinner from "./Spinner";
 
-const ImageUploader: React.FC = () => {
+interface ImageUploaderProps {
+  onImg1: (img1: string) => void;
+  onImg2: (img2: string) => void;
+  onImg3: (img3: string) => void;
+}
+
+const ImageUploader: React.FC<ImageUploaderProps> = ({
+  onImg1,
+  onImg2,
+  onImg3,
+}) => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (selectedImages[0]) onImg1(selectedImages[0]);
+    if (selectedImages[1]) onImg2(selectedImages[1]);
+    if (selectedImages[2]) onImg3(selectedImages[2]);
+  }, [selectedImages, onImg1, onImg2, onImg3]);
 
   const handleImageChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -18,11 +34,20 @@ const ImageUploader: React.FC = () => {
     if (!file || selectedImages.length >= 3) return;
 
     setUploading(true);
-    const uploadedUrl = await uploadImage(file);
-    if (uploadedUrl) {
-      setSelectedImages((prev) => [...prev, uploadedUrl]);
+    try {
+      const uploadedUrl = await uploadImage(file);
+      if (uploadedUrl) {
+        setSelectedImages((prev) => [...prev, uploadedUrl]);
+      }
+    } catch (error) {
+      console.error("Image upload failed", error);
+    } finally {
+      setUploading(false);
     }
-    setUploading(false);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handlePlaceholderClick = () => {
@@ -44,11 +69,11 @@ const ImageUploader: React.FC = () => {
             className="relative w-40 h-40 border-2 border-black-medium-200 rounded-lg overflow-hidden group"
           >
             <Image
-              width={500}
-              height={500}
               src={image}
               alt={`Selected ${index + 1}`}
-              className="w-full h-full object-cover"
+              width={160}
+              height={160}
+              className="rounded-lg object-cover group-hover:opacity-90 transition-opacity"
             />
             <div
               className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
