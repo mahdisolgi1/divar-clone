@@ -3,8 +3,11 @@ import { status } from "../_types/modalTypes";
 import { getStatuses } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import Spinner from "./Spinner";
+interface StatusDropDownProps {
+  onStatus: (status: string) => void;
+}
 
-const StatusDropDown: React.FC = () => {
+const StatusDropDown: React.FC<StatusDropDownProps> = ({ onStatus }) => {
   const [statuses, setStatus] = useState<status[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<status | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -49,6 +52,7 @@ const StatusDropDown: React.FC = () => {
 
   const handleProvinceSelect = (status: status) => {
     setSelectedStatus(status);
+    onStatus(status.status);
     setIsOpen(false);
   };
 
