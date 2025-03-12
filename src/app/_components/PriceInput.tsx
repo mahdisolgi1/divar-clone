@@ -1,9 +1,14 @@
-import { useState } from "react";
 import { formatPrice } from "../_utils/formatPrice";
 
-const PriceInput: React.FC = () => {
-  const [price, setPrice] = useState<string>("");
-
+interface PriceInputProps {
+  price: number;
+  onPriceChange: (price: number) => void;
+}
+const PriceInput: React.FC<PriceInputProps> = ({ price, onPriceChange }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    onPriceChange(Number(value));
+  };
   return (
     <div className="w-full me-auto text-right flex gap-1 z-50 flex-col">
       <h3 className="text-base text-black-primary pr-1">قیمت</h3>
@@ -11,7 +16,7 @@ const PriceInput: React.FC = () => {
         <input
           type="number"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={handleChange}
           className="bg-white border hover:border-black-dark-100 border-black-medium-100 w-full mx-auto rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 appearance-none no-spinner"
           placeholder="قیمت"
         />
@@ -27,7 +32,7 @@ const PriceInput: React.FC = () => {
             تومان
           </span>
           <span className="text-base text-black-primary text-right mt-1">
-            {formatPrice(price)}
+            {formatPrice(price.toString())}
           </span>
         </div>
       )}
