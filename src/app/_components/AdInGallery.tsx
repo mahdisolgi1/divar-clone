@@ -1,36 +1,16 @@
-"use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { FiMessageCircle } from "react-icons/fi";
-import { getAds } from "../_lib/data-service";
 import { Ad } from "../_types/modalTypes";
 import Link from "next/link";
 import { formatPrice } from "../_utils/formatPrice";
 import Spinner from "./Spinner";
 
-const AdInGallery: React.FC = () => {
-  const [ads, setAds] = useState<Ad[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+interface AdInGalleryProps {
+  loading: boolean;
+  ads: Ad[];
+}
 
-  useEffect(() => {
-    const fetchAds = async () => {
-      try {
-        const fetchedAds = await getAds();
-        if (Array.isArray(fetchedAds)) {
-          setAds(fetchedAds);
-        } else {
-          console.error("Fetched data is not an array", fetchedAds);
-        }
-      } catch (error) {
-        console.error("Error fetching ads:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAds();
-  }, []);
-
+const AdInGallery: React.FC<AdInGalleryProps> = ({ loading, ads }) => {
   if (loading) {
     return (
       <div className="flex justify-center w-full items-center  col-start-2">
@@ -38,12 +18,11 @@ const AdInGallery: React.FC = () => {
       </div>
     );
   }
-  console.log(ads);
   return (
     <>
       {ads.length === 0 ? (
-        <span className="text-right text-black-secondary text-[0.875rem] ">
-          No ads available.
+        <span className="text-right  w-96 col-start-2 text-black-secondary text-base ">
+          نتیجه‌ای یافت نشد. دسته‌بندی یا فیلترها را تغییر دهید
         </span>
       ) : (
         ads.map((ad) => (
