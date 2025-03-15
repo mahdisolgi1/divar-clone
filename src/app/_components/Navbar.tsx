@@ -1,12 +1,11 @@
-"use client";
 import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { CiLocationOn, CiUser } from "react-icons/ci";
 import { FiMessageCircle } from "react-icons/fi";
 import { GrSupport } from "react-icons/gr";
-import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import SearchBar from "./SearchBar";
 
 const Navbar: React.FC = () => {
   return (
@@ -53,14 +52,7 @@ const Navbar: React.FC = () => {
               </span>
             </Button>
 
-            <div className="relative w-full max-w-md">
-              <input
-                type="text"
-                className="bg-[#f0f0f1] rounded-lg px-2 py-2 md:w-[25rem] lg:w-[30rem] text-black placeholder:text-right text-right pl-10 "
-                placeholder="جستجو در همه آگهی ها"
-              />
-              <IoIosSearch className="absolute left-3 top-1/4 text-black-secondary   text-xl" />
-            </div>
+            <SearchBar />
           </div>
         </div>
         <div className="flex flex-row-reverse gap-4">
