@@ -30,7 +30,7 @@ const OTECheckBox: React.FC<OTECheckBoxProps> = ({
           "&.Mui-checked": {
             "& .MuiSvgIcon-root": {
               backgroundColor: "white",
-              color: "red",
+              color: "rgb(166 38 38 )",
             },
           },
         }}
