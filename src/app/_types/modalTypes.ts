@@ -9,7 +9,7 @@ export interface Ad {
   place: string;
   province: string;
   status: string;
-  openToExchange: string | null;
+  openToExchange: boolean;
   description: string;
   img1: string | null;
   img2: string | null;
