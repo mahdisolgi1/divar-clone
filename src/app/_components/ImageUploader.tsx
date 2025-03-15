@@ -66,7 +66,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         {selectedImages.map((image, index) => (
           <div
             key={index}
-            className="relative w-40 h-40 border-2 border-black-medium-200 rounded-lg overflow-hidden group"
+            className="relative w-40 h-40 border-2 border-black-medium-200 rounded-lg overflow-hidden "
           >
             <Image
               src={image}
