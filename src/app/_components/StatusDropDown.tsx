@@ -5,9 +5,13 @@ import { FaChevronDown } from "react-icons/fa";
 import Spinner from "./Spinner";
 interface StatusDropDownProps {
   onStatus: (status: string) => void;
+  status?: string;
 }
 
-const StatusDropDown: React.FC<StatusDropDownProps> = ({ onStatus }) => {
+const StatusDropDown: React.FC<StatusDropDownProps> = ({
+  onStatus,
+  status,
+}) => {
   const [statuses, setStatus] = useState<status[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<status | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -30,7 +34,11 @@ const StatusDropDown: React.FC<StatusDropDownProps> = ({ onStatus }) => {
 
     fetchProvinces();
   }, []);
-
+  useEffect(() => {
+    if (status === "") {
+      setSelectedStatus(null);
+    }
+  }, [status]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -73,9 +81,9 @@ const StatusDropDown: React.FC<StatusDropDownProps> = ({ onStatus }) => {
   }
 
   return (
-    <div className="w-full me-auto text-right flex gap-1 flex-col">
+    <div className="w-full me-auto  overflow-y-visible text-right flex gap-1 z-30 flex-col">
       <h3 className="text-base text-black-primary  pr-1">وضیعت</h3>
-      <div className="relative w-full mx-auto cursor-pointer" ref={dropdownRef}>
+      <div className=" w-full mx-auto cursor-pointer" ref={dropdownRef}>
         <div
           className="flex items-center w-full justify-between px-4 py-2 bg-white border hover:border-black-dark-100 border-black-medium-100 rounded-md cursor-pointer hover:bg-gray-50"
           onClick={toggleDropdown}
