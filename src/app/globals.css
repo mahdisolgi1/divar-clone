@@ -13,10 +13,14 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Vazirmatn", sans-serif;
 }
-* {
-  font-family: "Vazirmatn", sans-serif;
+*,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Vazirmatn", sans-serif !important;
 }
 
 .main-swiper img {
