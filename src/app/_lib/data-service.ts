@@ -1,22 +1,9 @@
 // // import { eachDayOfInterval } from "date-fns";
+import { Ad } from "../_types/modalTypes";
 import { supabase } from "./supabase";
 
 // /////////////
 // // GET
-interface Ad {
-  id: number;
-  created_at: string;
-  title: string;
-  price: number;
-  phoneNumber: number;
-  place: string;
-  status: string;
-  openToExchange: string | null;
-  description: string;
-  img1: string | null;
-  img2: string | null;
-  img3: string | null;
-}
 
 export async function getAd(id: number) {
   const { data, error } = await supabase
@@ -45,8 +32,130 @@ export const getAds = async function () {
     console.error(error);
     throw new Error("Ads could not be loaded");
   }
-  console.log(ads);
   return ads;
+};
+
+export const filterAds = async function (
+  titleSearch?: string,
+  province?: string,
+  category?: string,
+  status?: string,
+  minPrice?: number,
+  maxPrice?: number,
+  isExchangeOpen?: boolean
+) {
+  let query = supabase.from("ad").select("*").order("created_at");
+
+  if (titleSearch) query = query.ilike("title", `%${titleSearch}%`);
+  if (province) query = query.eq("province", province);
+  if (category) query = query.eq("category", category);
+  if (status) query = query.eq("status", status);
+  if (isExchangeOpen) query = query.eq("openToExchange", isExchangeOpen);
+
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    query = query.gte("price", minPrice).lte("price", maxPrice);
+  } else if (minPrice !== undefined) {
+    query = query.gte("price", minPrice);
+  } else if (maxPrice !== undefined) {
+    query = query.lte("price", maxPrice);
+  }
+
+  const { data: ads, error } = await query;
+
+  if (error) {
+    console.error(error);
+    throw new Error("Ads could not be loaded");
+  }
+
+  return ads;
+};
+export const searchAds = async (searchTerm: string, province?: string) => {
+  if (!searchTerm) return [];
+
+  try {
+    const query = supabase
+      .from("ad")
+      .select("*")
+      .ilike("title", `%${searchTerm}%`)
+      .limit(4);
+
+    if (province) {
+      query.eq("province", province);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error("Error fetching ads:", error);
+      return [];
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    return [];
+  }
+};
+
+export const queryedAds = async (searchTerm: string) => {
+  if (!searchTerm) return [];
+
+  const { data, error } = await supabase
+    .from("ad")
+    .select("*")
+    .ilike("title", `%${searchTerm}%`);
+
+  if (error) {
+    console.error("Error fetching ads:", error);
+    return [];
+  }
+
+  return data;
+};
+export const getCates = async function () {
+  const { data: ads, error } = await supabase
+    .from("category")
+    .select("*")
+    .order("id");
+
+  // For testing
+  // await new Promise((res) => setTimeout(res, 2000));
+
+  if (error) {
+    console.error(error);
+    throw new Error("categories could not be loaded");
+  }
+  return ads;
+};
+export const getProvinces = async function () {
+  const { data: provinces, error } = await supabase
+    .from("provinces")
+    .select("*")
+    .order("id");
+
+  // For testing
+  // await new Promise((res) => setTimeout(res, 2000));
+
+  if (error) {
+    console.error(error);
+    throw new Error("provinces could not be loaded");
+  }
+  return provinces;
+};
+export const getStatuses = async function () {
+  const { data: statuses, error } = await supabase
+    .from("statuses")
+    .select("*")
+    .order("id");
+
+  // For testing
+  // await new Promise((res) => setTimeout(res, 2000));
+
+  if (error) {
+    console.error(error);
+    throw new Error("provinces could not be loaded");
+  }
+  return statuses;
 };
 export const getFaves = async function () {
   const { data, error } = await supabase
@@ -61,7 +170,7 @@ export const getFaves = async function () {
     console.error(error);
     throw new Error("faves could not be loaded");
   }
-  console.log(data);
+
   return data;
 };
 export async function createAd(newAd: Ad): Promise<Ad[]> {
@@ -69,11 +178,31 @@ export async function createAd(newAd: Ad): Promise<Ad[]> {
 
   if (error) {
     console.error(error);
-    throw new Error("Guest could not be created");
+    throw new Error("Ad could not be created");
   }
 
   return data ?? [];
 }
+
+export async function uploadImage(file: File) {
+  const fileName = `${Date.now()}_${file.name}`;
+
+  const { error } = await supabase.storage
+    .from("ad-images")
+    .upload(fileName, file);
+
+  if (error) {
+    console.error("Upload failed:", error.message);
+    return null;
+  }
+
+  const { data: publicURL } = supabase.storage
+    .from("ad-images")
+    .getPublicUrl(fileName);
+
+  return publicURL?.publicUrl || null;
+}
+
 // export async function getCabinPrice(id) {
 //   const { data, error } = await supabase
 //     .from("cabins")
