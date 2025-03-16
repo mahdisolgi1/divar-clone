@@ -1,11 +1,12 @@
 import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { CiLocationOn, CiUser } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
 import { FiMessageCircle } from "react-icons/fi";
 import { GrSupport } from "react-icons/gr";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import SearchBar from "./SearchBar";
+import DropdownButton from "./ProvinceFilter";
 
 const Navbar: React.FC = () => {
   return (
@@ -26,17 +27,7 @@ const Navbar: React.FC = () => {
               className=" h-6 w-px mx-2 hidden lg:block bg-[#dbdbe4]"
               role="presentation"
             />
-
-            <Button
-              sx={{
-                color: " rgba(0, 0, 0, 0.56)",
-                padding: "0.5rem 1rem",
-              }}
-              className="flex gap-2 p-10 px-4 py-2 hover:bg-black-light-100  rounded transition-colors  transition-border duration-[360ms] ease-in-out  hover:text-black-primary text-black-secondary  items-center flex-row-reverse hover:bg-opacity-90"
-            >
-              <CiLocationOn className=" text-lg" />
-              <span className="text-inherit text-base font-medium">کرج </span>
-            </Button>
+            <DropdownButton />
           </div>
           <div className="flex items-center flex-row-reverse gap-10 ">
             <Button
