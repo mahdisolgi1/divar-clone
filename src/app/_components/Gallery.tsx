@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { filterAds } from "../_lib/data-service";
 import PriceFilter from "./PriceFilter";
 import AdStatusFilter from "./AdStatusFilter";
+import { useSearchParams } from "next/navigation";
 
 const Gallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
@@ -28,7 +29,9 @@ const Gallery: React.FC = () => {
   const [status, setStatus] = useState("");
   const [minPrice, setMinPrice] = useState<string>("");
   const [maxPrice, setMaxPrice] = useState<string>("");
-
+  const searchParams = useSearchParams();
+  const province = searchParams.get("province");
+  const titleSearch = searchParams.get("query") || "";
   const [activeCategory, setActiveCategory] = useState<string>("");
   const categories = [
     {
@@ -37,7 +40,7 @@ const Gallery: React.FC = () => {
         <MdOutlineHomeWork
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "املاک"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? " font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -49,7 +52,7 @@ const Gallery: React.FC = () => {
         <PiCarLight
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "وسایل نقلیه"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -61,7 +64,7 @@ const Gallery: React.FC = () => {
         <CgSmartphone
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "کالای دیجیتال"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -73,7 +76,7 @@ const Gallery: React.FC = () => {
         <BsLamp
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "خانه و آشپزخانه"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -85,7 +88,7 @@ const Gallery: React.FC = () => {
         <PiPaintBrushBroadLight
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "خدمات"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -97,7 +100,7 @@ const Gallery: React.FC = () => {
         <FiWatch
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "وسایل شخصی"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -109,7 +112,7 @@ const Gallery: React.FC = () => {
         <LuDices
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "سرگرمی و فراغت"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -121,7 +124,7 @@ const Gallery: React.FC = () => {
         <HiOutlineUsers
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "اجتماعی"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -133,7 +136,7 @@ const Gallery: React.FC = () => {
         <PiOfficeChairBold
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "تجهیزات و صنعتی"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -145,7 +148,7 @@ const Gallery: React.FC = () => {
         <PiToolboxLight
           className={`text-black-secondary text-xl group-hover:text-black-primary ${
             activeCategory === "استخدام و کاریابی"
-              ? "font-semibold text-base mr-5 text-black-primary"
+              ? "font-semibold text-base  text-black/75"
               : ""
           }`}
         />
@@ -158,6 +161,8 @@ const Gallery: React.FC = () => {
       try {
         setLoading(true);
         const filteredAds = await filterAds(
+          titleSearch || undefined,
+          province || undefined,
           activeCategory,
           status,
           minPrice ? Number(minPrice) : undefined,
@@ -173,14 +178,22 @@ const Gallery: React.FC = () => {
     };
 
     handleFilter();
-  }, [status, minPrice, maxPrice, activeCategory, isExchangeOpen]);
+  }, [
+    province,
+    titleSearch,
+    activeCategory,
+    status,
+    minPrice,
+    maxPrice,
+    isExchangeOpen,
+  ]);
 
   return (
     <section className="flex  overflow-y-visible justify-center relative">
       <p className="text-right absolute text-black-secondary  top-1 right-96">
         انواع آگهی‌ها و نیازمندی های کرج
       </p>
-      <div className="grid w-2/4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-3 mr-[300px]  mt-10 items-center">
+      <div className="grid w-2/4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-48 gap-y-5 p-3 mr-[300px]  mt-10 justify-center items-center">
         <AdInGallery ads={ads} loading={loading} />
       </div>
 
@@ -199,7 +212,7 @@ const Gallery: React.FC = () => {
               }}
               key={category.name}
               className={`group flex justify-center items-center gap-2 cursor-pointer  ${
-                activeCategory === category.name && "mr-2"
+                activeCategory === category.name && "mr-3"
               }`}
             >
               <span
