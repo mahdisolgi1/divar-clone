@@ -12,10 +12,12 @@ dayjs.locale("fa");
 
 interface PersianRelativeTimeProps {
   createdAt: string;
+  fontSize?: string;
 }
 
 const PersianRelativeTime: React.FC<PersianRelativeTimeProps> = ({
   createdAt,
+  fontSize,
 }) => {
   const [relativeTimeText, setRelativeTime] = useState<string>("");
   const [unit, setUnit] = useState<string>("");
@@ -43,7 +45,9 @@ const PersianRelativeTime: React.FC<PersianRelativeTimeProps> = ({
   }, [createdAt]);
 
   return (
-    <span className="flex text-right  justify-end items-center gap-1 text-black-secondary text-base ">
+    <span
+      className={`flex text-right    justify-end items-center gap-1 text-black-secondary text-base ${fontSize}`}
+    >
       <span> پیش در</span>
       <span> {unit} </span>
       <span className="text-right"> {relativeTimeText} </span>
