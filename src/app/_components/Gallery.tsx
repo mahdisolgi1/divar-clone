@@ -189,15 +189,17 @@ const Gallery: React.FC = () => {
   ]);
 
   return (
-    <section className="flex  overflow-y-visible justify-center relative">
-      <p className="text-right absolute text-black-secondary  top-1 right-96">
-        انواع آگهی‌ها و نیازمندی های کرج
-      </p>
-      <div className="grid w-2/4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-48 gap-y-5 p-3 mr-[300px]  mt-10 justify-center items-center">
-        <AdInGallery ads={ads} loading={loading} />
+    <section className="flex relative justify-center gap-12">
+      <div>
+        <p className="text-right text-black-secondary mb-4">
+          انواع آگهی‌ها و نیازمندی های {province || "ایران"}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 max-w-7xl min-w-2xl ">
+          <AdInGallery ads={ads} loading={loading} />
+        </div>
       </div>
 
-      <div className="flex p-[32px_20px_0_20px] flex-col text-right w-1/4 gap-5 fixed right-0 h-screen overflow-y-auto filter-section">
+      <div className=" right-0 top-0 w-1/8 mb-[0.25rem] h-screen flex flex-col gap-3 overflow-y-auto filter-section pb-[20px]">
         <div className="flex   flex-col text-right justify-start gap-2   items-end">
           <span className=" text-[0.875rem] text-xs text-black-primary">
             دسته ها
@@ -243,17 +245,17 @@ const Gallery: React.FC = () => {
           />
         </div>
 
-        <div className="-z-10">
-          <div className="flex whitespace-nowrap gap-5 text-black-secondary justify-center items-center ">
+        <div className="-z-10 flex flex-col gap-2">
+          <div className="flex whitespace-nowrap gap-5 text-black-secondary justify-center items-center text-sm ">
             <span>دریافت برنامه</span>
             <span>دربارهٔ دیوار</span>
             <span>اتاق خبر</span>
           </div>
-          <div className="flex text-black-secondary whitespace-nowrap justify-center items-center  gap-5">
+          <div className="flex text-black-secondary whitespace-nowrap justify-center items-center text-sm  gap-5">
             <span>دیوار حرفه‌ای</span>
             <span>گزارش آسیب‌پذیری</span>
           </div>
-          <div className="flex text-black-secondary justify-center whitespace-nowrap items-center  gap-5">
+          <div className="flex text-black-secondary justify-center whitespace-nowrap items-center text-sm  gap-5">
             <span>دیواری شو</span>
             <span>پشتیبانی و قوانین</span>
           </div>
