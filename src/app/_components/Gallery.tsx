@@ -21,6 +21,7 @@ import { filterAds } from "../_lib/data-service";
 import PriceFilter from "./PriceFilter";
 import AdStatusFilter from "./AdStatusFilter";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const Gallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
@@ -247,23 +248,78 @@ const Gallery: React.FC = () => {
 
         <div className="-z-10 flex flex-col gap-2">
           <div className="flex whitespace-nowrap gap-5 text-black-secondary justify-center items-center text-sm ">
-            <span>دریافت برنامه</span>
-            <span>دربارهٔ دیوار</span>
-            <span>اتاق خبر</span>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://divar.ir/help/download"
+              target="_blank"
+            >
+              دریافت برنامه
+            </Link>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://divar.ir/about"
+            >
+              دربارهٔ دیوار
+            </Link>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://divar.ir/help.news"
+            >
+              اتاق خبر
+            </Link>
           </div>
           <div className="flex text-black-secondary whitespace-nowrap justify-center items-center text-sm  gap-5">
-            <span>دیوار حرفه‌ای</span>
-            <span>گزارش آسیب‌پذیری</span>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://divar.ir/pro/introduction"
+              target="_blank"
+            >
+              دیوار حرفه‌ای
+            </Link>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://divar.ir/bugBounty"
+              target="_blank"
+            >
+              گزارش آسیب‌پذیری
+            </Link>
           </div>
           <div className="flex text-black-secondary justify-center whitespace-nowrap items-center text-sm  gap-5">
-            <span>دیواری شو</span>
-            <span>پشتیبانی و قوانین</span>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://careers.divar.ir/"
+              target="_blank"
+            >
+              دیواری شو
+            </Link>
+            <Link
+              className="hover:text-black-primary cursor-pointer"
+              href="https://divar.ir/help/"
+              target="_blank"
+            >
+              پشتیبانی و قوانین
+            </Link>
           </div>
         </div>
         <div className="flex gap-5 justify-center items-center w-full">
-          <FaLinkedin color="black" />
-          <FaTwitter color="black" />
-          <AiFillInstagram color="black" />
+          <Link href="https://linkedin.com/company/divar" target="_blank">
+            <FaLinkedin
+              className="text-black-secondary hover:opacity-80 cursor-pointer  "
+              size={18}
+            />
+          </Link>
+          <Link href="https://twitter.com/divar" target="_blank">
+            <FaTwitter
+              className="text-black-secondary hover:opacity-80 cursor-pointer  "
+              size={18}
+            />
+          </Link>
+          <Link href="https://instagram.com/divar" target="_blank">
+            <AiFillInstagram
+              className="text-black-secondary hover:opacity-80 cursor-pointer    "
+              size={18}
+            />
+          </Link>
         </div>
         <div className="flex items-center gap-3 justify-center">
           <div className="w-1/4 h-28 relative">

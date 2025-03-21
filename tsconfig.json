@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/_components/Ad.js"
+    "src/app/_components/Ad.js",
+    "src/app/_lib/supabase.js"
   ],
   "exclude": ["node_modules"]
 }

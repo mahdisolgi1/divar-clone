@@ -115,7 +115,7 @@ export const queryedAds = async (searchTerm: string) => {
 export const getCates = async function () {
   const { data: ads, error } = await supabase
     .from("category")
-    .select("*")
+    .select("")
     .order("id");
 
   // For testing

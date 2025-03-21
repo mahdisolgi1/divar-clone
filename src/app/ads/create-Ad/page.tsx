@@ -1,9 +1,9 @@
-import Ad from "../_components/Ad";
+import AdCat from "../../_components/AdCat";
 
 const page: React.FC = () => {
   return (
     <div>
-      <Ad />
+      <AdCat />
     </div>
   );
 };

@@ -120,6 +120,9 @@ const config: Config = {
         "border-positive-primary": "#1d7c4d",
         "border-positive-secondary": "#75cc9e",
       },
+      fontFamily: {
+        vazir: ["Vazir", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -28,9 +28,9 @@ const AdInGallery: React.FC<AdInGalleryProps> = ({ loading, ads }) => {
       ) : (
         ads.map((ad) => (
           <Link
-            href={`/${ad.id}`}
+            href={`/ads/${ad.id}`}
             key={ad.id}
-            className="flex cursor-pointer p-4 w-[350px] h-[170px] justify-between border border-spacing-1 hover:shadow-md transition-shadow rounded-lg"
+            className="flex cursor-pointer shadow-[0_0_0_1px_rgba(0,0,0,0.12)] p-4 w-[350px] h-[170px] justify-between  border-spacing-1 transition-shadow rounded-sm "
           >
             <div className="flex w-[160px] h-full gap-1">
               {ad.img1 ? (
@@ -50,7 +50,10 @@ const AdInGallery: React.FC<AdInGalleryProps> = ({ loading, ads }) => {
                   alt="Default image"
                 />
               )}
-              <FiMessageCircle size={15} color="black" className="self-end" />
+              <FiMessageCircle
+                size={25}
+                className="self-end text-black-secondary"
+              />
             </div>
 
             <div className="flex flex-col justify-between w-[calc(100%-180px)]">

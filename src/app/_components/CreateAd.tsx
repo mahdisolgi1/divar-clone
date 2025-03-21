@@ -55,11 +55,9 @@ const CreateAd: FC = () => {
   const [img3, setImg3] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isOTEChecked, setIsOTEChecked] = useState<boolean>(false);
-  console.log(`img1=${img1}`);
-  console.log(`img2=${img2}`);
-  console.log(`img3=${img3}`);
-  const { cat } = useParams();
+  const { cat, subcat } = useParams();
   const decodedCat = cat && decodeURIComponent(cat.toString());
+  const decodedSubcat = subcat && decodeURIComponent(subcat.toString());
   const maxLength = 200;
 
   const category = decodedCat && categories.find((c) => c === decodedCat);
@@ -76,6 +74,7 @@ const CreateAd: FC = () => {
       latitude: Number(positon[0]),
       longitude: Number(positon[1]),
       category: decodedCat,
+      subcategory: decodedSubcat,
       status,
       img1,
       img2,
