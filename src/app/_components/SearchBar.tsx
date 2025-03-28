@@ -71,7 +71,7 @@ const SearchBar: React.FC = () => {
         <div className="absolute p-4 md:w-[25rem] gap-2  lg:w-[30rem] bg-white border border-gray-300 rounded-lg mt-1 shadow-lg z-10 max-h-60 overflow-y-auto">
           {results.map((ad) => (
             <Link
-              href={`/${ad.id.toString()}`}
+              href={`/ads/${ad.id.toString()}`}
               key={ad.id}
               className="px-4 text-black-secondary py-2 text-right  cursor-pointer hover:bg-gray-100"
               onClick={() => setShowDropdown(false)}
