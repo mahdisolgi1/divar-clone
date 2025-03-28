@@ -23,12 +23,11 @@
     }
   },
   "include": [
-    "src/app/_components/Gallery.tsx",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/_components/Ad.js"
+
   ],
   "exclude": ["node_modules"]
 }
