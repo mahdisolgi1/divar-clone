@@ -1,11 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useState, } from "react";
+import { useState } from "react";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import Spinner from "./Spinner";
 import Link from "next/link";
-import { getProvinces } from "../_lib/data-service";
-import { province } from "../_types/modalTypes";
 import { useRouter } from "next/navigation";
 import { GoSearch } from "react-icons/go";
 const cities = [
