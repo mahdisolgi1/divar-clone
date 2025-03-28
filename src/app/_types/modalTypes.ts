@@ -6,8 +6,6 @@ export interface Ad {
   title: string;
   price: number;
   phoneNumber: number;
-  place: string;
-  province: string;
   status: string;
   openToExchange: boolean;
   description: string;
@@ -16,7 +14,8 @@ export interface Ad {
   img3: string | null;
   longitude: number;
   latitude: number;
-  category: string;
+  categoryId : number;
+  placeId: number;
 }
 
 // for Category
@@ -25,6 +24,8 @@ export interface Category {
   id: number;
   category: string;
   created_at: string;
+  subCategory1: string;
+  subCategory2: string;
 }
 
 // for province
@@ -33,8 +34,11 @@ export interface province {
   id: number;
   province: string;
   created_at: string;
-  longitude: number;
-  latitude: number;
+  provinceLongitude: number;
+  provinceLatitude: number;
+  city: string;
+  cityLongitude: number;
+  cityLatitude: number;
 }
 
 // for status
