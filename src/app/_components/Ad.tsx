@@ -85,7 +85,18 @@ const Ad: React.FC = () => {
             </span>
 
             <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
-            <span className="text-black-secondary text-xs">{ad.category}</span>
+            <span className="text-black-secondary text-xs">{ad.category.category}</span>
+
+            <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
+            <span className="text-black-secondary text-xs">{ad.category.subCategory1}</span>
+            {ad.category.subCategory2 && (
+              <>
+                <MdOutlineKeyboardArrowLeft className="text-black-secondary w-5" />
+                <span className="text-black-secondary text-xs">
+                  {ad.category.subCategory2}
+                </span>
+              </>
+            )}
           </div>
           <div className="flex  justify-center  flex-1 gap-5 ">
             <div className="max-w-[50%] flex flex-col  justify-center  gap-5 mr-[8.33%]">
@@ -161,7 +172,7 @@ const Ad: React.FC = () => {
                 </h1>
                 <div className=" flex text-right  justify-end items-center gap-1  ">
                   <p className="text-[0.875rem] text-black-secondary">
-                    {ad.place}
+                    {ad.place.city}
                   </p>
                   <PersianRelativeTime createdAt={ad.created_at} />
                 </div>
