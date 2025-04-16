@@ -1,4 +1,6 @@
+""
 import { useState } from "react";
+
 
 const PhoneInput: React.FC = () => {
   const [phone, setPhone] = useState<string>("");
@@ -47,16 +49,6 @@ const PhoneInput: React.FC = () => {
         </div>
       )}
 
-      <style jsx>{`
-        .no-spinner::-webkit-inner-spin-button,
-        .no-spinner::-webkit-outer-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        .no-spinner {
-          -moz-appearance: textfield;
-        }
-      `}</style>
     </div>
   );
 };
