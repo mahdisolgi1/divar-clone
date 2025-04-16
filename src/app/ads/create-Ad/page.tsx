@@ -1,6 +1,6 @@
 import AdCat from "../../_components/AdCat";
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
   return (
     <div>
       <AdCat />
@@ -8,4 +8,4 @@ const page: React.FC = () => {
   );
 };
 
-export default page;
+export default Page;
