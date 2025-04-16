@@ -37,16 +37,6 @@ const PriceInput: React.FC<PriceInputProps> = ({ price, onPriceChange }) => {
         </div>
       )}
 
-      <style jsx>{`
-        .no-spinner::-webkit-inner-spin-button,
-        .no-spinner::-webkit-outer-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        .no-spinner {
-          -moz-appearance: textfield;
-        }
-      `}</style>
     </div>
   );
 };
