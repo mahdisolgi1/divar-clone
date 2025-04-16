@@ -33,7 +33,7 @@ interface Category {
 }
 
 const CategoryFilterForNavbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [subCategories, setSubCategories] = useState<CategoryItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("املاک");
