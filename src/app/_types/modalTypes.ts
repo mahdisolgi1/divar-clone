@@ -14,8 +14,19 @@ export interface Ad {
   img3: string | null;
   longitude: number;
   latitude: number;
-  categoryId : number;
-  placeId: number;
+  categoryID: number;
+  placeID: number;
+  place: {
+    id: number;
+    province: string;
+    city: string;
+  };
+  category: {
+    id: number;
+    category: string;
+    subCategory1: string;
+    subCategory2: string;
+  };
 }
 
 // for Category
@@ -30,7 +41,7 @@ export interface Category {
 
 // for province
 
-export interface province {
+export interface place {
   id: number;
   province: string;
   created_at: string;
