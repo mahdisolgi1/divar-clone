@@ -8,19 +8,18 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useUser } from "../_context/UserContext";
-import SignUpModal from "./SignUpModal";
 
 interface LoginModalProps {
   open: boolean;
   handleClose: () => void;
+  openSignUp: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose,openSignUp }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { login } = useUser();
-  const [openSignUp, setOpenSignUp] = useState<boolean>(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -42,13 +41,20 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
 
   const handleSignUpLinkClick = () => {
     handleClose();
-    setOpenSignUp(true);
+    openSignUp();
   };
 
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={modalStyle}>
+      <Modal open={open} onClose={handleClose}         aria-labelledby="login-modal"
+      >
+      
+      <Box sx={{
+          ...modalStyle,
+          width: { xs: '90%', sm: '400px' },
+          maxWidth: '500px',
+        }}>.
+
           <Typography
             variant="h6"
             className="text-lg text-black-secondary text-right"
@@ -56,7 +62,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
             ورود به حساب کاربری
           </Typography>
           <TextField
-            label="Email"
+            label="ایمیل"
             variant="outlined"
             fullWidth
             value={email}
@@ -64,7 +70,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Password"
+            label="رمز عبور"
             type="password"
             variant="outlined"
             fullWidth
@@ -74,9 +80,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
           />
           <Button
             variant="contained"
-            sx={{ background: "#a62626" }}
-            className="hover:bg-[#be3737] hover:shadow-none text-right whitespace-nowrap"
-            onClick={handleLogin}
+            fullWidth
+            sx={{
+              background: "#a62626",
+              height: "48px",
+              "&:hover": {
+                background: "#be3737",
+              },
+            }}   onClick={handleLogin}
           >
             ورود
           </Button>
@@ -87,10 +98,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
             </Typography>
           )}
 
-          <Typography
+<Typography
             variant="body2"
-            sx={{ marginTop: 2, cursor: "pointer", color: "blue" }}
-            onClick={handleSignUpLinkClick}
+            sx={{ 
+              marginTop: 2, 
+              cursor: "pointer", 
+              color: "#1976d2",
+              textAlign: 'right'
+            }}  onClick={handleSignUpLinkClick}
           >
             حساب ندارید؟ ثبت نام حساب کاربری
           </Typography>
@@ -98,17 +113,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose }) => {
       </Modal>
 
       {/* Snackbar for showing success or error messages */}
-      {errorMessage && (
-        <Snackbar
-          open={!!errorMessage}
-          message={errorMessage}
-          autoHideDuration={6000}
-          onClose={() => setErrorMessage(null)}
-        />
-      )}
+  
 
       {/* Sign Up Modal */}
-      <SignUpModal open={openSignUp} handleClose={() => setOpenSignUp(false)} />
     </>
   );
 };
@@ -119,9 +126,9 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   backgroundColor: "white",
-  padding: "20px",
+  padding: "0 24px 24px 24px",
   borderRadius: "8px",
-  boxShadow: 24,
+  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
 };
 
 export default LoginModal;
