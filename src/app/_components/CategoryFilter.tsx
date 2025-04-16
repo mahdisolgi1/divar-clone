@@ -34,7 +34,6 @@ const CategoryFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Get category from URL
   const categoryFromUrl = searchParams.get("category") || "";
   const sub1FromUrl = searchParams.get("subCategory1") || "";
   const sub2FromUrl = searchParams.get("subCategory2") || "";
@@ -60,12 +59,10 @@ const CategoryFilter: React.FC = () => {
     fetchSubCategories();
   }, [categoryFromUrl]);
 
-  // Get unique subCategory1 values
   const uniqueSubCategories1 = Array.from(
     new Set(subCategories.map((item) => item.subCategory1))
   );
 
-  // Get unique subCategory2 values for the active subCategory1
   const uniqueSubCategories2 = Array.from(
     new Set(
       subCategories
@@ -75,7 +72,6 @@ const CategoryFilter: React.FC = () => {
     )
   );
 
-  // Check if the selected subCategory1 has any subCategory2 items
 
   const categories: Category[] = [
     {
@@ -131,7 +127,6 @@ const CategoryFilter: React.FC = () => {
   ];
 
   const handleCategorySelect = (category: string) => {
-    // Update URL
     const url = new URL(window.location.href);
     url.searchParams.set("category", category);
     url.searchParams.delete("subCategory1");
@@ -140,7 +135,6 @@ const CategoryFilter: React.FC = () => {
   };
 
   const handleSub1Select = (sub1: string) => {
-    // Update URL
     const url = new URL(window.location.href);
     url.searchParams.set("subCategory1", sub1);
     url.searchParams.delete("subCategory2");
@@ -148,14 +142,12 @@ const CategoryFilter: React.FC = () => {
   };
 
   const handleSub2Select = (sub2: string) => {
-    // Update URL
     const url = new URL(window.location.href);
     url.searchParams.set("subCategory2", sub2);
     router.push(url.toString());
   };
 
   const handleRemoveAll = () => {
-    // Update URL
     const url = new URL(window.location.href);
     url.searchParams.delete("category");
     url.searchParams.delete("subCategory1");

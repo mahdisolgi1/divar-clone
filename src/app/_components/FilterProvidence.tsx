@@ -120,7 +120,6 @@ const FilterProvidence: React.FC = () => {
         
         />
       </Button>
-      {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
           <div ref={modalRef} className="bg-white rounded-lg p-6 w-full max-w-md" dir="rtl">
@@ -145,7 +144,6 @@ const FilterProvidence: React.FC = () => {
             
             </div>
 
-            {/* Search Input */}
             {!selectedProvince && (
             <input
               type="text"
@@ -158,7 +156,6 @@ const FilterProvidence: React.FC = () => {
               )}
               </div>
 
-            {/* Provinces List */}
             {!selectedProvince && (
             <div className="max-h-[400px] overflow-y-auto">
                 {loading ? (
@@ -199,10 +196,9 @@ const FilterProvidence: React.FC = () => {
               </div>
             )}
 
-            {/* Cities List */}
+          
             {selectedProvince && cities.length > 0 && (
               <div className="max-h-[400px] overflow-y-auto">
-                {/* City Search Input */}
                 <input
                   type="text"
                   placeholder="جستجوی شهر..."
