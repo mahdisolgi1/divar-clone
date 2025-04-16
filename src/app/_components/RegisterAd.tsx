@@ -2,24 +2,24 @@
 
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { useUser } from "../_context/UserContext"; // assuming you have a UserContext
-import SignUpModal from "./SignUpModal"; // import the SignUpModal
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import AuthModals from "./AuthModals"; 
+import { useRouter } from "next/navigation"; 
+import { useUser } from "../_context/UserContext";
 
 const RegisterAd: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
-  const { user } = useUser(); // assuming useUser hook provides user state
-  const router = useRouter(); // Next.js router for navigation
+  const router = useRouter(); 
+  const { user } = useUser();
 
   const handleModalClose = () => setOpenModal(false);
   const handleModalOpen = () => setOpenModal(true);
 
   const handleClick = (event: React.MouseEvent) => {
-    if (!user) {
-      event.preventDefault();
-      handleModalOpen(); // Open the sign-up modal if no user
+    event.preventDefault();
+    if (user) {
+      router.push("/ads/create-ad");
     } else {
-      router.push("/create-ad"); // Redirect to create-ad page
+      handleModalOpen(); 
     }
   };
 
@@ -34,8 +34,7 @@ const RegisterAd: React.FC = () => {
         ثبت آگهی
       </Button>
 
-      {/* Conditionally render the modal if no user */}
-      <SignUpModal open={openModal} handleClose={handleModalClose} />
+      <AuthModals  open={openModal} handleClose={handleModalClose} />
     </>
   );
 };
