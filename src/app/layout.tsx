@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { UserProvider } from "./_context/UserContext";
 
 export const metadata: Metadata = {
   title: "divar",
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className=" mt-28">{children}</main>
+        <UserProvider>
+          <main className="mt-28">{children}</main>
+        </UserProvider>
       </body>
     </html>
   );
