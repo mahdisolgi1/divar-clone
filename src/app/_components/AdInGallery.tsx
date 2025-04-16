@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import { FiMessageCircle } from "react-icons/fi";
 import { Ad } from "../_types/modalTypes";
@@ -22,9 +23,14 @@ const AdInGallery: React.FC<AdInGalleryProps> = ({ loading, ads }) => {
   return (
     <>
       {ads.length === 0 ? (
-        <span className="text-right   col-start-2 row-start-2 w-[350px] h-[170px] text-black-secondary text-base ">
-          نتیجه‌ای یافت نشد. دسته‌بندی یا فیلترها را تغییر دهید
-        </span>
+        <div className="   col-start-2 row-start-2 text-nowrap flex flex-col items-center justify-center gap-2 ">
+        <h4 className="text-right text-base  text-black-primary  ">
+.نتیجه‌ای برای جستجوی شما پیدا نشد
+</h4>
+<span className="text-black-secondary text-[0.875rem]">
+  .پیشنهاد می‌کنیم که دسته و فیلترهای انتخابی خود را بازبینی کنید
+</span>
+        </div>
       ) : (
         ads.map((ad) => (
           <Link
@@ -77,7 +83,7 @@ const AdInGallery: React.FC<AdInGalleryProps> = ({ loading, ads }) => {
                     createdAt={ad.created_at}
                     fontSize="text-sm"
                   />
-                  {ad.place} در
+                  {ad.place ? ` در ${ad.place.city}` : ''}
                 </span>
               </div>
             </div>
