@@ -229,3 +229,14 @@ select {
     transform: scale(1);
   }
 }
+.no-spinner {
+  /* Hide spin buttons in WebKit browsers (Chrome, Safari) */
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Hide spin buttons in Firefox */
+  -moz-appearance: textfield;
+}
