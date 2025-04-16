@@ -4,17 +4,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import { MdOutlineHomeWork } from "react-icons/md";
 import AdInGallery from "./AdInGallery";
-import {
-  PiCarLight,
-  PiOfficeChairBold,
-  PiPaintBrushBroadLight,
-  PiToolboxLight,
-} from "react-icons/pi";
-import { CgSmartphone } from "react-icons/cg";
-import { BsLamp } from "react-icons/bs";
-import { FiWatch } from "react-icons/fi";
-import { LuDices } from "react-icons/lu";
-import { HiOutlineUsers } from "react-icons/hi";
+
 import { Ad } from "../_types/modalTypes";
 import { useEffect, useState } from "react";
 import { filterAds } from "../_lib/data-service";
@@ -22,7 +12,7 @@ import PriceFilter from "./PriceFilter";
 import AdStatusFilter from "./AdStatusFilter";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-
+import CategoryFilter from "./CategoryFilter";
 const Gallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -31,131 +21,15 @@ const Gallery: React.FC = () => {
   const [minPrice, setMinPrice] = useState<string>("");
   const [maxPrice, setMaxPrice] = useState<string>("");
   const searchParams = useSearchParams();
-  const province = searchParams.get("province");
-  const titleSearch = searchParams.get("query") || "";
-  const [activeCategory, setActiveCategory] = useState<string>("");
-  const categories = [
-    {
-      name: "املاک",
-      icon: (
-        <MdOutlineHomeWork
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "املاک"
-              ? " font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "وسایل نقلیه",
-      icon: (
-        <PiCarLight
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "وسایل نقلیه"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "کالای دیجیتال",
-      icon: (
-        <CgSmartphone
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "کالای دیجیتال"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "خانه و آشپزخانه",
-      icon: (
-        <BsLamp
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "خانه و آشپزخانه"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "خدمات",
-      icon: (
-        <PiPaintBrushBroadLight
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "خدمات"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "وسایل شخصی",
-      icon: (
-        <FiWatch
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "وسایل شخصی"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "سرگرمی و فراغت",
-      icon: (
-        <LuDices
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "سرگرمی و فراغت"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "اجتماعی",
-      icon: (
-        <HiOutlineUsers
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "اجتماعی"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "تجهیزات و صنعتی",
-      icon: (
-        <PiOfficeChairBold
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "تجهیزات و صنعتی"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-    {
-      name: "استخدام و کاریابی",
-      icon: (
-        <PiToolboxLight
-          className={`text-black-secondary text-xl group-hover:text-black-primary ${
-            activeCategory === "استخدام و کاریابی"
-              ? "font-semibold text-base  text-black/75"
-              : ""
-          }`}
-        />
-      ),
-    },
-  ];
+  const province = searchParams ? searchParams.get("province") : "";
+  const city = searchParams ? searchParams.get("city") || "" : "";
+  const activeCategory = searchParams ? searchParams.get("category") || "" : "";
+  const activeSub1 = searchParams ? searchParams.get("subCategory1") || "" : "";
+  const activeSub2 = searchParams ? searchParams.get("subCategory2") || "" : "";
+  const titleSearch = searchParams ? searchParams.get("query") || "" : "";
+  const [activeCategoryt, setActiveCategory] = useState<string>("");
+  const [activeSub1t, setActiveSub1] = useState<string>("");
+  const [activeSub2t, setActiveSub2] = useState<string>("");
 
   useEffect(() => {
     const handleFilter = async () => {
@@ -168,7 +42,10 @@ const Gallery: React.FC = () => {
           status,
           minPrice ? Number(minPrice) : undefined,
           maxPrice ? Number(maxPrice) : undefined,
-          isExchangeOpen
+          isExchangeOpen,
+          activeSub1,
+          activeSub2,
+          city
         );
         setAds(filteredAds);
       } catch (error) {
@@ -187,6 +64,8 @@ const Gallery: React.FC = () => {
     minPrice,
     maxPrice,
     isExchangeOpen,
+    activeSub1,
+    activeSub2,city
   ]);
 
   return (
@@ -201,35 +80,7 @@ const Gallery: React.FC = () => {
       </div>
 
       <div className=" right-0 top-0 w-1/8 mb-[0.25rem] h-screen flex flex-col gap-3 overflow-y-auto filter-section pb-[20px]">
-        <div className="flex   flex-col text-right justify-start gap-2   items-end">
-          <span className=" text-[0.875rem] text-xs text-black-primary">
-            دسته ها
-          </span>
-
-          {categories.map((category) => (
-            <div
-              onClick={() => {
-                setActiveCategory(
-                  activeCategory !== category.name ? category.name : ""
-                );
-              }}
-              key={category.name}
-              className={`group flex justify-center items-center gap-2 cursor-pointer  ${
-                activeCategory === category.name && "mr-3"
-              }`}
-            >
-              <span
-                className={`text-[0.875rem] leading-8 text-black-secondary text-right group-hover:text-black-primary ${
-                  activeCategory === category.name &&
-                  "font-semibold text-base text-black"
-                }`}
-              >
-                {category.name}
-              </span>
-              {category.icon}
-            </div>
-          ))}
-        </div>
+     <CategoryFilter/>
         <div className="relative">
           <PriceFilter
             maxPrice={maxPrice}
