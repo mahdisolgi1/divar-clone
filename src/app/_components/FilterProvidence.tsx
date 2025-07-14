@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
-import { getProvinces, getCitiesByProvince } from "../_lib/data-service";
+import { getPlace, getCitiesByProvince } from "../_lib/data-service";
 import { place } from "../_types/modalTypes";
 import { useRouter } from "next/navigation";
 import Spinner from "./Spinner";
@@ -33,10 +33,8 @@ const FilterProvidence: React.FC = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const data = await getProvinces();
-        const uniqueProvinces = Array.from(new Set(data.map((p) => p.province)))
-          .map((province) => data.find((p) => p.province === province));
-        setProvinces(uniqueProvinces);
+        const data = await getPlace();
+        setProvinces(data as place[]);
       } catch (err) {
         setError("Failed to load provinces");
         console.error(err);
@@ -102,30 +100,40 @@ const FilterProvidence: React.FC = () => {
 
   return (
     <div className="relative">
-      <Button
-        sx={{
-          color: "rgba(0, 0, 0, 0.56)",
-          padding: "0.5rem 1rem",
-        }}
-        className="flex gap-2 px-4 py-2 hover:bg-black-light-100 rounded transition-colors transition-border duration-[360ms] ease-in-out hover:text-black-primary text-black-secondary items-center hover:bg-opacity-90"
-        onClick={() => setIsOpen(true)}
+   <Button
+
+sx={{
+  padding: '0.5rem 1rem',
+  display: 'flex',
+  gap: '0.5rem',
+  flexDirection: 'row-reverse',
+  alignItems: 'center',
+  color:  'rgba(0, 0, 0, 0.56)',
+  '&:hover': {
+    backgroundColor:  'rgba(0, 0, 0, 0.04)',
+    color: 'rgba(0, 0, 0, 0.87)',
+  },
+}}
+className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  dark:hover:text-dark-white-primary "
+              variant="text"
+   onClick={() => setIsOpen(true)}
       >
+        <CiLocationOn
+          className=" text-[1.4rem] "
+          size={20}
+        
+        />
         <span className="text-base font-medium whitespace-nowrap">
           {selectedProvince ? selectedProvince : "استان ها"}
         </span>
 
-        <CiLocationOn
-          className="text-lg"
-          size={20}
-        
-        />
       </Button>
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div ref={modalRef} className="bg-white rounded-lg p-6 w-full max-w-md" dir="rtl">
+          <div ref={modalRef} className="bg-white dark:bg-black rounded-lg p-6 w-full max-w-md" dir="rtl">
        <div className="shadow-[0_1px_2px_0_rgba(0,0,0,0.08)] flex flex-col gap-2 ">
              <div className="flex  justify-between items-center mb-4">
-              <h2 className="text-lg font-medium text-black-primary text-[1.125rem]">انتخاب شهر</h2>
+              <h2 className="text-lg font-medium text-black-primary dark:text-dark-white-primary text-[1.125rem]">انتخاب شهر</h2>
              
         {selectedProvince &&      <span
             className="hover:bg-[rgba(166,38,38,0.08)] p-2   rounded-full text-xs cursor-pointer text-brand"
@@ -150,7 +158,7 @@ const FilterProvidence: React.FC = () => {
               placeholder="جستجوی استان..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded-md  mb-4"
+                className= "bg-[#f0f0f1]  focus:outline-none  text-black-primary dark:text-dark-white-primary dark:bg-dark-white-light-200 w-full p-2 border border-gray-300 dark:border-none text-dark-black-primary dark:text-dark-white-text-dark-black-primary rounded-md  mb-4"
               dir="rtl"
             />
               )}
@@ -178,15 +186,15 @@ const FilterProvidence: React.FC = () => {
                             setSelectedProvince(province.province);
                         } else handleRemoveProvince();
                       }}
-                        className={`p-3 rounded-md border-b-2 flex justify-between items-center border-black-light-100 transition-colors w-full text-base text-black-primary text-right ${
+                        className={`p-3 rounded-md border-b-2 flex justify-between items-center border-black-light-100 dark:text-dark-white-light-100  transition-colors w-full text-base text-black-primary dark:text-dark-white-primary text-right ${
                         selectedProvince === province.province
                           ? "bg-red-100 text-red-600"
-                          : "hover:bg-gray-100"
+                          : "hover:bg-gray-100 dark:hover:bg-dark-gray-100"
                       }`}
                     >
                        
                        <span className=""> {province.province}</span>
-                        <span className="text-black-light-100 text-base">
+                        <span className="text-black-light-100 dark:text-dark-dark-white-light-100 text-base">
                           <FaAngleLeft />
                         </span>
                     </button>
@@ -204,7 +212,7 @@ const FilterProvidence: React.FC = () => {
                   placeholder="جستجوی شهر..."
                   value={citySearchTerm}
                   onChange={(e) => setCitySearchTerm(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md mb-4 "
+                  className="w-full bg-[#f0f0f1]  focus:outline-none    dark:bg-dark-white-light-200  p-2 border border-gray-300 dark:border-none text-dark-black-primary dark:text-dark-white-text-dark-black-primary rounded-md mb-4 "
                   dir="rtl"
                 />
                 <div className="flex flex-col gap-2">
@@ -215,7 +223,7 @@ const FilterProvidence: React.FC = () => {
                       router.push(url.toString());
                       setIsOpen(false);
                     }}
-                    className="p-3 rounded-md border-b-2 flex justify-between items-center border-black-light-100 transition-colors w-full text-base text-black-primary text-right"              >
+                    className="p-3 rounded-md border-b-2 flex justify-between items-center border-black-light-100 dark:border-dark-white-light-100 transition-colors w-full text-base text-black-primary dark:text-dark-white-primary text-right"              >
                     همه شهرها
                   </button>
                   {filteredCities.map((city, index) => (
@@ -227,7 +235,7 @@ const FilterProvidence: React.FC = () => {
                     router.push(url.toString());
                         setIsOpen(false);
                   }}
-                      className="p-3 rounded-md border-b-2 flex justify-between items-center border-black-light-100 transition-colors w-full text-base text-black-primary text-right ">
+                      className="p-3 rounded-md border-b-2 flex justify-between items-center border-black-light-100 dark:border-dark-white-light-100 transition-colors w-full text-base text-black-primary dark:text-dark-white-primary text-right ">
                       {city || 'نامشخص'}
                     </button>
                   ))}
