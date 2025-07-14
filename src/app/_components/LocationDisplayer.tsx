@@ -70,11 +70,11 @@ const LocationDisplayer: React.FC<LocationDisplayerProps> = ({
             <div className="flex justify-between items-center p-3">
               <span
                 onClick={closeModal}
-                className="p-2 flex justify-center items-center cursor-pointer hover:bg-black-light-100  rounded-full"
+                className="p-2 flex justify-center items-center cursor-pointer hover:bg-black-light-100 dark:hover:bg-dark-white-light-100 rounded-full"
               >
-                <IoCloseOutline className="text-black-secondary text-2xl" />
+                <IoCloseOutline className="text-black-secondary dark:text-dark-white-secondary text-2xl" />
               </span>
-              <h2 className="text-black-primary text-base">موقعیت مکانی</h2>
+              <h2 className="text-black-primary dark:text-dark-white-primary text-base">موقعیت مکانی</h2>
             </div>
           )}
 
