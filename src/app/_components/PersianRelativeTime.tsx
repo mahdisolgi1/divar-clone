@@ -46,7 +46,7 @@ const PersianRelativeTime: React.FC<PersianRelativeTimeProps> = ({
 
   return (
     <span
-      className={`flex text-right    justify-end items-center gap-1 text-black-secondary text-base ${fontSize}`}
+      className={`flex text-right    justify-end items-center gap-1 text-black-secondary dark:text-dark-white-secondary text-base ${fontSize}`}
     >
       <span> پیش در</span>
       <span> {unit} </span>

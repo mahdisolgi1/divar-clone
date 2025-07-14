@@ -82,10 +82,10 @@ const StatusDropDown: React.FC<StatusDropDownProps> = ({
 
   return (
     <div className="w-full me-auto  overflow-y-visible text-right flex gap-1 z-30 flex-col">
-      <h3 className="text-base text-black-primary  pr-1">وضیعت</h3>
+      <h3 className="text-base text-black-primary dark:text-dark-white-primary  pr-1">وضیعت</h3>
       <div className=" w-full mx-auto cursor-pointer" ref={dropdownRef}>
         <div
-          className="flex items-center w-full justify-between px-4 py-2 bg-white border hover:border-black-dark-100 border-black-medium-100 rounded-md cursor-pointer hover:bg-gray-50"
+          className="flex items-center w-full justify-between px-4 py-2 bg-white dark:bg-black border hover:border-black-dark-100 border-black-medium-100 dark:border-dark-white-medium-100 rounded-md cursor-pointer  hover:bg-gray-50 dark:hover:bg-dark-gray-50"
           onClick={toggleDropdown}
         >
           <span
@@ -93,19 +93,19 @@ const StatusDropDown: React.FC<StatusDropDownProps> = ({
               isOpen ? "rotate-180" : ""
             }`}
           >
-            <FaChevronDown className="text-black-hint text-lg" />
+            <FaChevronDown className="text-black-hint dark:text-dark-white-hint text-lg" />
           </span>
-          <span className="text-black-primary text-base">
+          <span className="text-black-primary dark:text-dark-white-primary text-base">
             {selectedStatus ? selectedStatus.status : "انتخاب"}
           </span>
         </div>
 
         {isOpen && (
-          <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+          <ul className="absolute z-10 mt-1 w-full bg-white dark:bg-black border border-gray-300 rounded-md shadow-lg dark:shadow-none">
             {statuses.map((status) => (
               <li
                 key={status.id}
-                className="px-4 py-2 text-right text-black-secondary text-[0.875rem] hover:bg-black-light-200 cursor-pointer hover:bg-gray-100"
+                className="px-4 py-2 text-right text-black-secondary dark:text-dark-white-secondary text-[0.875rem] hover:bg-black-light-200 dark:hover:bg-dark-white-light-200  cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-gray-100"
                 onClick={() => handleProvinceSelect(status)}
               >
                 {status.status}

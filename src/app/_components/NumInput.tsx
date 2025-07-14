@@ -22,7 +22,7 @@ const PhoneInput: React.FC = () => {
 
   return (
     <div className="w-full me-auto text-right flex gap-1 flex-col">
-      <h3 className="text-base text-black-primary pr-1">شماره تلفن</h3>
+      <h3 className="text-base text-black-primary dark:text-dark-white-primary pr-1">شماره تلفن</h3>
       <div className="relative">
         <input
           type="tel"
@@ -33,17 +33,17 @@ const PhoneInput: React.FC = () => {
             const cleaned = input.replace(/\D/g, "").slice(0, 11);
             setPhone(cleaned);
           }}
-          className="bg-white border hover:border-black-dark-100 border-black-medium-100 w-full mx-auto rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 appearance-none no-spinner"
+          className="bg-white border hover:border-black-dark-100 border-black-medium-100 dark:border-dark-white-medium-100 w-full mx-auto rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 appearance-none no-spinner"
           placeholder="شماره تلفن"
         />
       </div>
 
       {phone && (
         <div className="flex justify-end gap-1">
-          <span className="text-base text-black-primary text-right mt-1">
+          <span className="text-base text-black-primary dark:text-dark-white-primary text-right mt-1">
             {toPersianNumbers(formatPhoneNumber(phone))}
           </span>
-          <span className="text-base text-black-primary text-right mt-1">
+          <span className="text-base text-black-primary dark:text-dark-white-primary text-right mt-1">
             :شماره تلفن
           </span>
         </div>

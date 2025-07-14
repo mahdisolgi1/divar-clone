@@ -4,10 +4,13 @@ import {
   TextField,
   Button,
   Typography,
+  Snackbar,
+  CircularProgress,
 } from "@mui/material";
 import { useState, useEffect } from "react";
+import LoginModal from "./LoginModal";
 import { useUser } from "../_context/UserContext";
-import Spinner from "./Spinner";
+
 interface SignUpModalProps {
   open: boolean;
   handleClose: () => void;
@@ -37,11 +40,11 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ open, handleClose,openLogin }
 
   const handleSignUp = async () => {
     console.log('handleSignUp called');
-    
+    // Reset messages
     setErrorMessage(null);
     setSuccessMessage(null);
 
-    
+    // Validate inputs
     if (!email || !password) {
       setErrorMessage("لطفا هر دو فیلد را پر کنید.");
       return;
@@ -112,7 +115,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ open, handleClose,openLogin }
         }}>
           <Typography
             variant="h6"
-            className="text-lg text-black-secondary text-right "
+            className="text-lg text-black-secondary dark:text-dark-white-secondary text-right "
           >
             ساخت حساب کاربری
           </Typography>
@@ -154,7 +157,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ open, handleClose,openLogin }
             onClick={handleSignUp}
           >
             {loading ? (
-              <Spinner />
+              <CircularProgress size={24} color="inherit" />
             ) : (
               "ثبت نام"
             )}

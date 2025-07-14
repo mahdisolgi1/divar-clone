@@ -43,41 +43,41 @@ const ProvinceSelector: React.FC = () => {
       />
       <div className="flex shadow-[0_1px_0_rgba(0,0,0,0.12)]  items-center px-10 justify-center w-full flex-row-reverse gap-16">
         <Link
-          className="text-[0.75rem]  pb-3 text-black-secondary  whitespace-nowrap"
+          className="text-[0.75rem]  pb-3 text-black-secondary dark:text-dark-white-secondary  whitespace-nowrap"
           href="/ads/create-Ad"
         >
           ثبت آگهی
         </Link>
         <Link
-          className="text-[0.75rem] pb-3 text-black-secondary whitespace-nowrap"
+          className="text-[0.75rem] pb-3 text-black-secondary dark:text-dark-white-secondary whitespace-nowrap"
           href="https://divar.ir/about"
         >
           دربارهٔ دیوار
         </Link>
         <Link
-          className="text-[0.75rem] pb-3 text-black-secondary whitespace-nowrap"
+          className="text-[0.75rem] pb-3 text-black-secondary dark:text-dark-white-secondary whitespace-nowrap"
           href="https://divar.ir/help/download"
         >
           دریافت برنامه
         </Link>
         <Link
-          className="text-[0.75rem] pb-3 text-black-secondary whitespace-nowrap"
+          className="text-[0.75rem] pb-3 text-black-secondary dark:text-dark-white-secondary whitespace-nowrap"
           href="https://divar.ir/help.news"
         >
           اتاق خبر
         </Link>
         <Link
-          className="text-[0.75rem] pb-3 text-black-secondary whitespace-nowrap"
+          className="text-[0.75rem] pb-3 text-black-secondary dark:text-dark-white-secondary whitespace-nowrap"
           href="https://divar.ir/help"
         >
           پشتیبانی
         </Link>
       </div>
       <div className="text-center">
-        <span className="text-[0.875rem]  text-black-secondary leading-8 ">
+        <span className="text-[0.875rem]  text-black-secondary dark:text-dark-white-secondary leading-8 ">
           !دﯾﻮار، ﭘﺎﯾﮕﺎه ﺧﺮﯾﺪ و ﻓﺮوش ﺑﯽ‌واﺳﻄﻪ‌
         </span>
-        <p className="text-[0.875rem] text-black-secondary leading-8">
+        <p className="text-[0.875rem] text-black-secondary dark:text-dark-white-secondary leading-8">
           اﮔﻪ دﻧﺒﺎل ﭼﯿﺰی ﻫﺴﺘﯽ، ﺷﻬﺮت رو اﻧﺘﺨﺎب ﮐﻦ و ﺗﻮ دﺳﺘﻪ‌ﺑﻨﺪی‌ﻫﺎ ﺑﻪ دﻧﺒﺎﻟﺶ
           ﺑﮕﺮد. اﮔﺮ ﻫﻢ ﻣﯽ‌ﺧﻮای ﭼﯿﺰی ﺑﻔﺮوﺷﯽ، ﭼﻨﺪ ﺗﺎ ﻋﮑﺲ ﺧﻮب ازش ﺑﮕﯿﺮ و آﮔﻬﯿﺖ رو
           ﺑﭽﺴﺒﻮن ﺑﻪ دﯾﻮار
@@ -92,7 +92,7 @@ const ProvinceSelector: React.FC = () => {
               placeholder="جستجوی استان..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md border-black-medium-200 shadow-[0_1px_2px_0_rgba(0,0,0,0.12)] focus:border-[#be3737] focus:outline-none focus:ring-1 focus:ring-[#be3737] pr-10"
+              className="w-full p-2 border border-gray-300 rounded-md border-black-medium-200 dark:border-dark-white-medium-200 shadow-[0_1px_2px_0_rgba(0,0,0,0.12)] focus:border-[#be3737] focus:outline-none focus:ring-1 focus:ring-[#be3737] pr-10"
               dir="rtl"
             />
             <GoSearch
@@ -100,7 +100,7 @@ const ProvinceSelector: React.FC = () => {
               size={16}
             />
           </div>
-          <h3 className=" text-black-primary text-right self-end text-base font-medium">
+          <h3 className=" text-black-primary dark:text-dark-white-primary text-right self-end text-base font-medium">
             انتخاب استان
           </h3>
         </div>
@@ -114,7 +114,7 @@ const ProvinceSelector: React.FC = () => {
                 <span
                   key={i} 
                   onClick={() => handleProvinceSelect(province)}
-                  className="p-3 text-[0.875rem] leading-8 font-medium text-black-secondary cursor-pointer hover:text-black-primary "
+                  className="p-3 text-[0.875rem] leading-8 font-medium text-black-secondary dark:text-dark-white-secondary cursor-pointer hover:text-black-primary dark:text-dark-white-primary "
                 >
                   {province}
                 </span>
@@ -154,19 +154,19 @@ const ProvinceSelector: React.FC = () => {
       <div className="flex gap-5 justify-center py-10 items-center w-full pt-4">
         <Link href="https://linkedin.com/company/divar" target="_blank">
           <FaLinkedin
-            className="text-black-secondary hover:opacity-80 cursor-pointer  "
+            className="text-black-secondary dark:text-dark-white-secondary hover:opacity-80 cursor-pointer  "
             size={24}
           />
         </Link>
         <Link href="https://twitter.com/divar" target="_blank">
           <FaTwitter
-            className="text-black-secondary hover:opacity-80 cursor-pointer  "
+            className="text-black-secondary dark:text-dark-white-secondary hover:opacity-80 cursor-pointer  "
             size={24}
           />
         </Link>
         <Link href="https://instagram.com/divar" target="_blank">
           <FaInstagram
-            className="text-black-secondary hover:opacity-80 cursor-pointer  "
+            className="text-black-secondary dark:text-dark-white-secondary hover:opacity-80 cursor-pointer  "
             size={24}
           />
         </Link>

@@ -51,10 +51,10 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
     }
   };
   return (
-    <div className="w-full  border-y border-[#dbdbe4]">
+    <div className="w-full  border-y  border-[#858585] dark:border-[#2c2c2c]">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="text-black-primary relative p-4 text-right flex justify-end items-center gap-2 font-medium cursor-pointer"
+        className="text-black-primary dark:text-dark-white-primary relative p-4 text-right flex justify-end items-center gap-2 font-medium cursor-pointer"
       >
         {(minPrice || maxPrice) && (
           <span
@@ -67,9 +67,9 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
             حذف
           </span>
         )}
-        <span className="text-xs">قیمت</span>
+        <span className="text-xs text-black-primary dark:text-dark-white-primary">قیمت</span>
         <MdKeyboardArrowDown
-          className={`text-[0.875rem] text-lg transition-transform duration-300 ${
+          className={`text-[0.875rem] text-lg  text-black-primary dark:text-dark-white-primary transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -86,18 +86,18 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
               onKeyDown={handleKeyDown}
               type="text"
               placeholder="حداقل قیمت"
-              className="bg-white border hover:border-black-dark-100 border-black-medium-100 w-full rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 pr-8 appearance-none no-spinner"
+              className="bg-[#f0f0f1] border focus:outline-none text-black-primary dark:text-dark-white-primary  dark:bg-dark-white-light-200  hover:border-black-dark-100 border-black-medium-100 dark:border-dark-white-medium-100 w-full rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 pr-8 appearance-none no-spinner"
               value={formatPrice(minPrice)}
               onChange={handleMinPriceChange}
             />
 
-            <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black-hint">
+            <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black-hint dark:text-dark-white-hint">
               تومان
             </span>
 
             {minPrice && (
               <IoClose
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black-secondary cursor-pointer hover:text-black-primary"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black-secondary dark:text-dark-white-secondary cursor-pointer hover:text-black-primary dark:text-dark-white-primary"
                 size={18}
                 onClick={() => onMinPrice("")}
               />
@@ -109,18 +109,18 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
               onKeyDown={handleKeyDown}
               type="text"
               placeholder="حداکثر قیمت"
-              className="bg-white border hover:border-black-dark-100 border-black-medium-100 w-full rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 pr-8 appearance-none no-spinner"
+              className="bg-[#f0f0f1] border  focus:outline-none  text-black-primary dark:text-dark-white-primary dark:bg-dark-white-light-200  hover:border-black-dark-100 border-black-medium-100 dark:border-dark-white-medium-100 w-full rounded-lg px-2 py-2 text-black placeholder:text-right text-right pl-10 pr-8 appearance-none no-spinner"
               value={formatPrice(maxPrice)}
               onChange={handleMaxPriceChange}
             />
 
-            <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black-hint">
+            <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black-hint dark:text-dark-white-hint">
               تومان
             </span>
 
             {maxPrice && (
               <IoClose
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black-secondary cursor-pointer hover:text-black-primary"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black-secondary dark:text-dark-white-secondary cursor-pointer hover:text-black-primary dark:text-dark-white-primary"
                 size={18}
                 onClick={() => onMaxPrice("")}
               />
