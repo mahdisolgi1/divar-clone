@@ -57,7 +57,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose,openSignUp })
 
           <Typography
             variant="h6"
-            className="text-lg text-black-secondary text-right"
+            className="text-lg text-black-secondary dark:text-dark-white-secondary text-right"
           >
             ورود به حساب کاربری
           </Typography>
