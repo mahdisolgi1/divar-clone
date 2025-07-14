@@ -27,9 +27,6 @@ const Gallery: React.FC = () => {
   const activeSub1 = searchParams ? searchParams.get("subCategory1") || "" : "";
   const activeSub2 = searchParams ? searchParams.get("subCategory2") || "" : "";
   const titleSearch = searchParams ? searchParams.get("query") || "" : "";
-  const [activeCategoryt, setActiveCategory] = useState<string>("");
-  const [activeSub1t, setActiveSub1] = useState<string>("");
-  const [activeSub2t, setActiveSub2] = useState<string>("");
 
   useEffect(() => {
     const handleFilter = async () => {
@@ -48,6 +45,7 @@ const Gallery: React.FC = () => {
           city
         );
         setAds(filteredAds);
+   console.log(filteredAds)
       } catch (error) {
         console.error("Failed to fetch ads:", error);
       } finally {
@@ -71,7 +69,7 @@ const Gallery: React.FC = () => {
   return (
     <section className="flex relative justify-center gap-12">
       <div>
-        <p className="text-right text-black-secondary mb-4">
+        <p className="text-right text-black-secondary dark:text-dark-white-secondary mb-4">
           انواع آگهی‌ها و نیازمندی های {province || "ایران"}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 max-w-7xl min-w-2xl ">
@@ -98,76 +96,74 @@ const Gallery: React.FC = () => {
         </div>
 
         <div className="-z-10 flex flex-col gap-2">
-          <div className="flex whitespace-nowrap gap-5 text-black-secondary justify-center items-center text-sm ">
+          <div className="flex whitespace-nowrap gap-5 text-black-secondary dark:text-dark-white-secondary justify-center items-center text-sm ">
             <Link
-              className="hover:text-black-primary cursor-pointer"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
               href="https://divar.ir/help/download"
               target="_blank"
             >
               دریافت برنامه
             </Link>
             <Link
-              className="hover:text-black-primary cursor-pointer"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
               href="https://divar.ir/about"
             >
               دربارهٔ دیوار
             </Link>
             <Link
-              className="hover:text-black-primary cursor-pointer"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
               href="https://divar.ir/help.news"
             >
               اتاق خبر
             </Link>
           </div>
-          <div className="flex text-black-secondary whitespace-nowrap justify-center items-center text-sm  gap-5">
+          <div className="flex text-black-secondary dark:text-dark-white-secondary whitespace-nowrap justify-center items-center text-sm  gap-5">
             <Link
-              className="hover:text-black-primary cursor-pointer"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
               href="https://divar.ir/pro/introduction"
               target="_blank"
             >
               دیوار حرفه‌ای
             </Link>
             <Link
-              className="hover:text-black-primary cursor-pointer"
-              href="https://divar.ir/bugBounty"
-              target="_blank"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
+              href="https://www.linkedin.com/in/mahdi-solgi"              target="_blank"
             >
               گزارش آسیب‌پذیری
             </Link>
           </div>
-          <div className="flex text-black-secondary justify-center whitespace-nowrap items-center text-sm  gap-5">
+          <div className="flex text-black-secondary dark:text-dark-white-secondary justify-center whitespace-nowrap items-center text-sm  gap-5">
             <Link
-              className="hover:text-black-primary cursor-pointer"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
               href="https://careers.divar.ir/"
               target="_blank"
             >
               دیواری شو
             </Link>
             <Link
-              className="hover:text-black-primary cursor-pointer"
-              href="https://divar.ir/help/"
-              target="_blank"
+              className="hover:text-black-primary dark:text-dark-white-primary cursor-pointer"
+              href="https://www.linkedin.com/in/mahdi-solgi"              target="_blank"
             >
               پشتیبانی و قوانین
             </Link>
           </div>
         </div>
         <div className="flex gap-5 justify-center items-center w-full">
-          <Link href="https://linkedin.com/company/divar" target="_blank">
+          <Link href="https://www.linkedin.com/in/mahdi-solgi" target="_blank">
             <FaLinkedin
-              className="text-black-secondary hover:opacity-80 cursor-pointer  "
+              className="text-black-secondary dark:text-dark-white-secondary hover:opacity-80 cursor-pointer  "
               size={18}
             />
           </Link>
           <Link href="https://twitter.com/divar" target="_blank">
             <FaTwitter
-              className="text-black-secondary hover:opacity-80 cursor-pointer  "
+              className="text-black-secondary dark:text-dark-white-secondary hover:opacity-80 cursor-pointer  "
               size={18}
             />
           </Link>
           <Link href="https://instagram.com/divar" target="_blank">
             <AiFillInstagram
-              className="text-black-secondary hover:opacity-80 cursor-pointer    "
+              className="text-black-secondary dark:text-dark-white-secondary hover:opacity-80 cursor-pointer    "
               size={18}
             />
           </Link>
