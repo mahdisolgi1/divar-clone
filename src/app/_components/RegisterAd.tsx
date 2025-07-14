@@ -1,41 +1,26 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { useState } from "react";
-import AuthModals from "./AuthModals"; 
-import { useRouter } from "next/navigation"; 
-import { useUser } from "../_context/UserContext";
+import { useRouter } from "next/navigation";
+import UserModal from "./UserModal";
 
 const RegisterAd: React.FC = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const router = useRouter(); 
-  const { user } = useUser();
+  const router = useRouter();
 
-  const handleModalClose = () => setOpenModal(false);
-  const handleModalOpen = () => setOpenModal(true);
-
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    if (user) {
-      router.push("/ads/create-ad");
-    } else {
-      handleModalOpen(); 
-    }
+  const handleAuthenticated = () => {
+    router.push("/ads/create-ad");
   };
 
   return (
-    <>
+    <UserModal onAuthenticated={handleAuthenticated}>
       <Button
         variant="contained"
         sx={{ background: "#a62626" }}
-        className="hover:bg-[#be3737] hover:shadow-none whitespace-nowrap"
-        onClick={handleClick}
+        className="hover:bg-[#be3737] hover:shadow-none dark:text-dark-black-primary whitespace-nowrap"
       >
         ثبت آگهی
       </Button>
-
-      <AuthModals  open={openModal} handleClose={handleModalClose} />
-    </>
+    </UserModal>
   );
 };
 
