@@ -10,7 +10,7 @@ const CheckBoxes: React.FC = () => {
 
   return (
     <div onChange={handleChange}>
-      <label className="text-black-primary text-[0.875rem]">
+      <label className="text-black-primary dark:text-dark-white-primary text-[0.875rem]">
         مایلم معاوضه کنم
       </label>
       <Checkbox
