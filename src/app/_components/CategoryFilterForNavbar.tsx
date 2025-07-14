@@ -212,13 +212,7 @@ const CategoryFilterForNavbar: React.FC = () => {
     fontWeight: isActive ? 600 : 400,
   });
 
-  const getTextStyle = (isActive: boolean, isBold: boolean = true) => ({
-    fontSize: isBold ? "0.875rem" : "0.75rem",
-    lineHeight: isBold ? "2rem" : "1.5rem",
-    color: isActive ? "rgba(0, 0, 0, 0.87)" : "rgba(0, 0, 0, 0.56)",
-    fontWeight: isActive ? 600 : isBold ? 500 : 400,
-    textAlign: "right" as const,
-  });
+
 
   const handleScroll = (direction: "left" | "right") => {
     const container = containerRef.current;
@@ -248,28 +242,37 @@ const CategoryFilterForNavbar: React.FC = () => {
   };
 
   return (
-    <div>
-      <Button
-        onClick={() => setIsOpen(true)}
-        variant="text"
-        sx={{
-          color: "rgba(0, 0, 0, 0.56)",
-          padding: "0.5rem 1rem",
-          display: "flex",
-          gap: "0.5rem",
-          flexDirection: "row-reverse",
-          alignItems: "center",
-          "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.04)",
-            color: "rgba(0, 0, 0, 0.87)",
-          },
-        }}
+    <div >
+      <Button        
+      
+      
+      onClick={() => setIsOpen(true)}
+    
+
+      sx={{
+        padding: '0.5rem 1rem',
+        display: 'flex',
+        gap: '0.5rem',
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        color:  'rgba(0, 0, 0, 0.56)',
+        '&:hover': {
+          backgroundColor:  'rgba(0, 0, 0, 0.04)',
+          color: 'rgba(0, 0, 0, 0.87)',
+        },
+      }}
+      className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  dark:hover:text-dark-white-primary "
+                    variant="text"
+      
+                  
       >
         <MdKeyboardArrowDown
+               
+
           className={`${
             isOpen ? "rotate-180 transition-transform duration-300" : ""
-          }`}
-          style={{ fontSize: "1.25rem" }}
+          } text-xl`}
+       
         />
         <span style={{ fontSize: "1rem", fontWeight: 500, whiteSpace: "nowrap" }}>
           دسته ها
@@ -278,14 +281,14 @@ const CategoryFilterForNavbar: React.FC = () => {
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0  bg-opacity-50 z-40"
             style={{ top: "64px" }}
             onClick={() => setIsOpen(false)}
           />
 
           <div
             ref={modalRef}
-            className="absolute top-16 left-1/2 -translate-x-1/2 bg-white rounded-md p-6 w-[80rem] max-w-[85rem] min-h-[496px] max-h-[520px]  z-50 shadow-[0_1px_6px_0_rgba(0,0,0,0.1),0_-8px_32px_-4px_rgba(0,0,0,0.05),0_16px_24px_-6px_rgba(0,0,0,0.05)]"
+            className="absolute top-16 left-1/2 -translate-x-1/2 bg-white dark:bg-black rounded-md p-6 w-[80rem] max-w-[85rem] min-h-[496px] max-h-[520px]  z-50 shadow-[0_1px_6px_0_rgba(0,0,0,0.1),0_-8px_32px_-4px_rgba(0,0,0,0.05),0_16px_24px_-6px_rgba(0,0,0,0.05)]"
             dir="rtl"
           >
             <div className="flex justify-between items-center mb-4"></div>
@@ -295,7 +298,7 @@ const CategoryFilterForNavbar: React.FC = () => {
                 <div className="flex flex-col gap-2">
                   {categoryFromUrl && (
                     <button
-                      className="flex items-center text-black-secondary shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] hover:bg-black-light-100 text-xs px-4 py-2 cursor-pointer justify-start gap-2"
+                      className="flex items-center text-black-secondary shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] hover:bg-light-100 text-xs px-4 py-2 cursor-pointer justify-start gap-2"
                       onClick={handleRemoveAll}
                     >
                       <FaArrowRight />
@@ -309,24 +312,43 @@ const CategoryFilterForNavbar: React.FC = () => {
                     <button
                       key={category.name}
                       onMouseEnter={() => setActiveCategory(category.name)}
-                      className={`flex items-center hover:bg-black-light-100 justify-between  gap-1 px-4  text-black-secondary text-xs rounded-md transition-colors ${
+                      className={`flex items-center hover:bg-light-100 justify-between  gap-1 px-4  text-black-secondary text-xs rounded-md transition-colors ${
                         activeCategory === category.name
                           ? "bg-gray-100"
-                          : "hover:bg-gray-50"
+                          : " hover:bg-gray-50 dark:hover:bg-dark-gray-50"
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         <category.icon
-                          style={getIconStyle(activeCategory === category.name)}
+                        className={`
+    text-xl
+    ${activeCategory === category.name
+      ? "font-semibold text-black/75 dark:text-white/75"
+      : "font-normal text-black/60 dark:text-white/60"
+    }
+  `}
                         />
-                        <span style={getTextStyle(activeCategory === category.name)}>
-                          {category.name}
-                        </span>
+                     <span
+  className={`
+    text-sm leading-8" : "text-xs leading-6
+    text-right
+    ${activeCategory === category.name
+      ? "font-semibold text-black-primary dark:text-dark-white-primary"
+      : "font-medium text-black/60 dark:text-white/60"}
+  `}
+>
+  {category.name}
+</span>
+
                       </div>
                       <span
-                        className="text-black-secondary text-base"
-                        style={getTextStyle(activeCategory === category.name)}
-                      >
+                        className={`
+                          text-sm leading-8"  "text-xs leading-6
+                          text-right
+                          ${activeCategory === category.name}
+                            ? "font-semibold text-black-primary dark:text-dark-white-primary"
+                            : "font-medium text-black/60 dark:text-white/60"
+                        `}                      >
                         <FaChevronLeft />
                       </span>
                     </button>
@@ -344,13 +366,13 @@ const CategoryFilterForNavbar: React.FC = () => {
                     
                           <button
                             onClick={() => handleScroll("right")}
-                            className="absolute p-3 right-0 top-1/2 text-black-secondary bg-white-nav -translate-y-1/2  rounded-full hover:bg-gray-100"
+                            className="absolute p-3 right-0 top-1/2 text-black-secondary dark:text-white-secondary bg-white-nav dark:bg-dark-black-nav  -translate-y-1/2  rounded-full hover:bg-gray-100 dark:hover:bg-dark-gray-100"
                             >
                             <FaChevronRight className="text-gray-500" />
                           </button>
                           <button
                             onClick={() => handleScroll("left")}
-                            className="absolute left-0 top-1/2 text-black-secondary bg-white-nav -translate-y-1/2 p-3 rounded-full hover:bg-gray-100"
+                            className="absolute left-0 top-1/2 text-black-secondary bg-white-nav dark:bg-dark-black-nav dark:text-white-secondary -translate-y-1/2 p-3 rounded-full hover:bg-gray-100 dark:hover:bg-dark-gray-100"
                           >
                             <FaChevronLeft className="text-gray-500" />
                           </button>
@@ -370,10 +392,17 @@ const CategoryFilterForNavbar: React.FC = () => {
                                 className={`w-full text-right text-nowrap inline-block text-xs p-2 text-black-primary rounded-md transition-colors ${
                                   activeSub1 === sub1
                                     ? "bg-gray-100"
-                                    : "hover:bg-gray-50"
+                                    : " hover:bg-gray-50 dark:hover:bg-dark-gray-50"
                                 }`}
                               >
-                                <span style={getTextStyle(activeSub1 === sub1)}>
+                                <span   className={`
+    ${activeSub1 === sub1
+      ? "font-semibold text-black-primary dark:text-dark-white-primary"
+      : "font-medium text-black/60 dark:text-white/60"
+    }
+    text-sm leading-8
+    text-right
+  `}>
                                   {sub1}
                                 </span>
                               </button>
@@ -387,14 +416,19 @@ const CategoryFilterForNavbar: React.FC = () => {
                                       className={`w-full text-right text-black-secondary text-xs rounded-md transition-colors ${
                                         activeSub2 === sub2
                                           ? "bg-gray-100"
-                                          : "hover:bg-gray-50"
+                                          : " hover:bg-gray-50 dark:hover:bg-dark-gray-50"
                                       }`}
                                     >
+                                 
                                       <span
-                                        style={getTextStyle(
-                                          activeSub2 === sub2,
-                                          false
-                                        )}
+                          className={`
+                            ${activeSub2 === sub2
+                              ? "font-semibold text-black-primary dark:text-dark-white-primary"
+                              : "font-normal text-black/60 dark:text-white/60"
+                            }
+                            text-xs leading-6
+                            text-right
+                          `}
                                       >
                                         {sub2}
                                       </span>
