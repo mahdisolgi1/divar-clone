@@ -66,7 +66,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         {selectedImages.map((image, index) => (
           <div
             key={index}
-            className="relative w-40 h-40 border-2 border-black-medium-200 rounded-lg overflow-hidden "
+            className="relative w-40 h-40 border-2 border-black-medium-200 dark:border-dark-white-medium-200 rounded-lg overflow-hidden "
           >
             <Image
               src={image}
@@ -85,14 +85,14 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         ))}
         {selectedImages.length < 3 && (
           <div
-            className="w-40 h-40 border-2 border-dashed border-black-medium-200 hover:border-black-secondary rounded-lg flex items-center justify-center cursor-pointer"
+            className="w-40 h-40 border-2 border-dashed border-black-medium-200 dark:border-dark-white-medium-200 hover:border-black-secondary dark:hover:border-dark-white-secondary rounded-lg flex items-center justify-center cursor-pointer"
             onClick={handlePlaceholderClick}
           >
             {uploading ? (
               <Spinner />
             ) : (
               <div className="flex flex-col items-center">
-                <TiImage className="text-4xl text-black-medium-200" />
+                <TiImage className="text-4xl text-black-medium-200 dark:text-dark-white-medium-100" />
                 <FaPlusCircle className="text-brand" />
               </div>
             )}
