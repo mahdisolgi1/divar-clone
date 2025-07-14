@@ -155,25 +155,13 @@ const CategoryFilter: React.FC = () => {
     router.push(url.toString());
   };
 
-  const getIconStyle = (isActive: boolean) => ({
-    fontSize: "1.25rem",
-    color: isActive ? "rgba(0, 0, 0, 0.75)" : "rgba(0, 0, 0, 0.56)",
-    fontWeight: isActive ? 600 : 400,
-  });
 
-  const getTextStyle = (isActive: boolean, isBold: boolean = true) => ({
-    fontSize: isBold ? "0.875rem" : "0.75rem",
-    lineHeight: isBold ? "2rem" : "1.5rem",
-    color: isActive ? "rgba(0, 0, 0, 0.87)" : "rgba(0, 0, 0, 0.56)",
-    fontWeight: isActive ? 600 : (isBold ? 500 : 400),
-    textAlign: "right" as const,
-  });
 
   return (
     <div className="flex flex-col text-right justify-start gap-2 items-end">
-      <span className="text-[0.875rem] text-xs text-black-primary">
+      <span className="text-[0.875rem] text-xs text-black-primary dark:text-dark-white-primary">
         دسته ها
-      </span>  {categoryFromUrl &&   <div  onClick={handleRemoveAll} className="flex items-center text-black-secondary text-base cursor-pointer  justify-center gap-2">
+      </span>  {categoryFromUrl &&   <div  onClick={handleRemoveAll} className="flex items-center text-black-secondary dark:text-dark-white-secondary text-base cursor-pointer  justify-center gap-2">
                         <span  className="text-gray-500 text-sm">
                     همهٔ آگهی‌ها  
       </span>
@@ -187,10 +175,11 @@ const CategoryFilter: React.FC = () => {
             onClick={() => handleCategorySelect(category.name)}
             className="group flex justify-center items-center gap-2 cursor-pointer"
           >
-            <span style={getTextStyle(false)}>
+            <span  className="text-sm leading-8 text-black-secondary dark:text-white-secondary font-medium text-right">
               {category.name}
             </span>
-            <category.icon style={getIconStyle(false)} />
+            <category.icon className="text-xl text-black-secondary dark:text-dark-white-primary font-normal"
+ />
           </div>
         ))
       ) : (
@@ -198,19 +187,21 @@ const CategoryFilter: React.FC = () => {
           onClick={handleRemoveAll}
           className="group flex justify-center items-center gap-2 cursor-pointer mr-3"
         >
-          <span style={getTextStyle(true)}>
+          <span className="text-sm leading-8 text-black-primary dark:text-dark-white-primary font-semibold text-right"
+>
             {categories.find(c => c.name === categoryFromUrl)?.name}
           </span>
           {(() => {
             const category = categories.find(c => c.name === categoryFromUrl);
-            return category ? <category.icon style={getIconStyle(true)} /> : null;
+            return category ? <category.icon className="text-xl text-[rgba(0,0,0,0.75)] font-semibold"
+            /> : null;
           })()}
         </div>
       )}
 
       {categoryFromUrl && !sub1FromUrl && uniqueSubCategories1.length > 0 && (
         <div className="w-full">
-          <span className="text-[0.875rem] text-xs text-black-primary block mb-2">
+          <span className="text-[0.875rem] text-xs text-black-primary dark:text-dark-white-primary block mb-2">
             زیر دسته‌ها
           </span>
           {loading ? (
@@ -222,7 +213,8 @@ const CategoryFilter: React.FC = () => {
                 onClick={() => handleSub1Select(subCategory)}
                 className="group flex justify-end items-center gap-1 cursor-pointer py-2"
               >
-                <span style={getTextStyle(false)}>
+                <span className="text-sm leading-8 text-black-secondary dark:text-white-secondary font-medium text-right"
+ >
                   {subCategory}
                 </span>
               </div>
@@ -237,13 +229,14 @@ const CategoryFilter: React.FC = () => {
             onClick={() => handleSub1Select("")}
             className="group flex justify-end items-center gap-2 cursor-pointer py-2 mr-3"
           >
-            <span style={getTextStyle(true)}>
+            <span className="text-sm leading-8 text-black-primary dark:text-dark-white-primary font-semibold text-right"
+>
               {sub1FromUrl}
             </span>
           </div>
           {uniqueSubCategories2.length > 0 && (
             <>
-              <span className="text-[0.875rem] text-xs text-black-primary block mb-2">
+              <span className="text-[0.875rem] text-xs text-black-primary dark:text-dark-white-primary block mb-2">
                 زیر دسته‌های {sub1FromUrl}
               </span>
               {loading ? (
@@ -256,7 +249,7 @@ const CategoryFilter: React.FC = () => {
                     className={`group flex justify-end items-center cursor-pointer ${
                       sub2FromUrl === subCategory2 
                       ? "text-brand border-r-brand" 
-                      : "border-r-black-secondary text-black-secondary"
+                      : "border-r-black-secondary text-black-secondary dark:text-dark-white-secondary"
                     }`}
                   >
                     <span className={`border-r-2 pr-2 text-base text-right py-2`}>
