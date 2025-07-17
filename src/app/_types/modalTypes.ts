@@ -16,6 +16,8 @@ export interface Ad {
   latitude: number;
   categoryID: number;
   placeID: number;
+  userID: string;
+  userEmail: string;
   place: {
     id: number;
     province: string;
@@ -58,4 +60,48 @@ export interface status {
   id: number;
   status: string;
   created_at: string;
+}
+// for chats
+
+export interface Chat {
+  id: number;
+  adID: number;
+  ad: {
+    id: number;
+    title: string;
+    userEmail: string;
+    img1: string;
+  };
+  senderID: string;
+  receiverID: string;
+  senderEmail: string;
+  receiverEmail: string;
+  message: string;
+  created_at: string;
+}
+// for user
+
+export interface MyNote {
+  id: number;
+  note: string;
+  adID: number;
+  userID: string;
+  ad: {
+    id: number;
+    title: string;
+    userEmail: string;
+    img1: string;
+  };  
+}
+
+export interface MySavedAd {
+  id: number;
+  adID: number;
+  userID: string;
+  ad: {
+    id: number;
+    title: string;
+    userEmail: string;
+    img1: string;
+  };
 }
