@@ -9,12 +9,17 @@ export default function AdsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div>
+  return ( 
+       <html className="dark" lang="en">
+      <body className="dark:bg-black bg-white"> 
+
+    
       <UserProvider>
-        <Navbar />
-        <main className="mt-28 px-4">{children}</main>
+        <Navbar isUsedInGallery={true}/>
+        <main className="mt-20 px-4">{children}</main>
       </UserProvider>
-    </div>
+    
+      </body>
+       </html>
   );
 }
