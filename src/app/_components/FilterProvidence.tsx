@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { IoMdClose } from "react-icons/io";
+import { IoMdArrowBack, IoMdClose } from "react-icons/io";
 import { getPlace, getCitiesByProvince } from "../_lib/data-service";
 import { place } from "../_types/modalTypes";
 import { useRouter } from "next/navigation";
@@ -114,7 +114,7 @@ sx={{
     color: 'rgba(0, 0, 0, 0.87)',
   },
 }}
-className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  dark:hover:text-dark-white-primary "
+className="dark:bg-dark-black bg-white flex flex-col md:flex-row-reverse dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  dark:hover:text-dark-white-primary lg:dark:bg-dark-white-light-200"
               variant="text"
    onClick={() => setIsOpen(true)}
       >
@@ -130,7 +130,7 @@ className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  
       </Button>
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div ref={modalRef} className="bg-white dark:bg-black rounded-lg p-6 w-full max-w-md" dir="rtl">
+          <div ref={modalRef} className="bg-white dark:bg-black rounded-lg p-6 w-full lg:max-w-md" dir="rtl">
        <div className="shadow-[0_1px_2px_0_rgba(0,0,0,0.08)] flex flex-col gap-2 ">
              <div className="flex  justify-between items-center mb-4">
               <h2 className="text-lg font-medium text-black-primary dark:text-dark-white-primary text-[1.125rem]">انتخاب شهر</h2>
@@ -149,7 +149,9 @@ className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  
           >
        حذف همه
           </span>}
-            
+          <button onClick={() =>  setIsOpen(false)} className="mr-2 text-black-primary dark:text-dark-white-secondary hover:text-gray-500">
+              <IoMdArrowBack size={28} />
+            </button>
             </div>
 
             {!selectedProvince && (

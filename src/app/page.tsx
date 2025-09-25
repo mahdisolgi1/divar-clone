@@ -14,7 +14,7 @@ const Page: React.FC = () => {
   }, [router]);
 
   return (
-    <div className="mt-28">
+    <div className=" md:mt-28">
       <ProvinceSelector />
     </div>
   );

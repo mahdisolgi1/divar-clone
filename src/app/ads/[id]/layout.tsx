@@ -11,9 +11,9 @@ export default function AdLayout({
 }) {
   return (
     
-        <div className="dark dark:bg-black bg-white">
+        <div className="">
     <UserProvider>
-        <Navbar />
+        {/* <Navbar /> */}
         <main className="mt-28 px-4">{children}</main>
       </UserProvider>
       </div>

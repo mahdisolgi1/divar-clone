@@ -1,5 +1,6 @@
 "use client";
 
+import BottomNav from "../_components/BottomNav";
 import Navbar from "../_components/Navbar";
 import { UserProvider } from "../_context/UserContext";
 import "../globals.css";
@@ -15,7 +16,8 @@ export default function MyDivarLayout({
     <UserProvider>
         <Navbar />
         <main className="mt-28 px-4">{children}</main>
-      </UserProvider>
+        <BottomNav />
+      </UserProvider> 
       </body>
       </html>  );
 }

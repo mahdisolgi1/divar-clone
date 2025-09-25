@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import UserModal from "./UserModal";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { useUser } from "../_context/UserContext";
+import ActiveFilterForMobile from "./ActiveFilterForMobile";
 
 
 interface NavbarProps {
@@ -23,6 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ isUsedInGallery= false  }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorEl2, setAnchorEl2 ] = useState<null | HTMLElement>(null);
   const [dark, setDark] = useState<boolean>(false);
+  const { user,logout } = useUser();
 
   const router = useRouter();
 
@@ -43,13 +46,26 @@ const Navbar: React.FC<NavbarProps> = ({ isUsedInGallery= false  }) => {
   };
 
 
-  const handleAuthenticated1 = () => {
-    router.push("/ads/create-ad");
+
+  const handleAuthenticatedMyAds = () => {
+    router.push("/my-divar?filter=my-ads");
+  };
+  const handleAuthenticatedMyNotes = () => {
+    router.push("/my-divar?filter=my-notes");
+  };
+  
+  const handleAuthenticatedSavedAds = () => {
+    router.push("/my-divar?filter=my-saved-ads");
+  };
+  
+
+  const handleAuthenticatedMyChat = () => {
+    router.push("/my-chat");
+  };
+  const handleAuthenticatedMyChatForMyAds = () => {
+    router.push("/my-chat-for-my-ads");
   };
 
-  const handleAuthenticated2 = () => {
-    router.push("/ads/create-ad");
-  };
 
   useEffect(() => {
 
@@ -73,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({ isUsedInGallery= false  }) => {
 
   return (
     <>
-      <header className={` z-50 shadow-[0_1px_2px_0_rgba(0,0,0,0.12)] dark:border-[#2c2c2c] dark:border-b dark:border-transparent flex flex-row-reverse fixed items-center py-4 top-0 w-full bg-white text-#000 text-base ${isUsedInGallery ? "justify-around": "justify-between px-24"} dark:bg-black `}>
+      <header className={`hidden  z-50 shadow-[0_1px_2px_0_rgba(0,0,0,0.12)] dark:border-[#2c2c2c] dark:border-b dark:border-transparent lg:flex flex-row-reverse fixed items-center py-4 top-0 w-full bg-white text-#000 text-base ${isUsedInGallery ? "justify-around": "justify-between px-24"} dark:bg-black `}>
         <div className=" flex  items-center flex-row-reverse gap-4">
           <div className="flex items-center flex-row-reverse ">
             <Link href="/ads">
@@ -143,20 +159,18 @@ const Navbar: React.FC<NavbarProps> = ({ isUsedInGallery= false  }) => {
               }
             }}
           >
-            <UserModal onAuthenticated={handleAuthenticated2}>
-              <Link href="/my-divar?filter=my-saved-ads">
+            <UserModal onAuthenticated={handleAuthenticatedSavedAds}>
                 <MenuItem sx={{ justifyContent: 'center' }} onClick={() => handleClose2()}>آگهی های ذخیره شده</MenuItem>
-              </Link>
             </UserModal>
-            <UserModal onAuthenticated={handleAuthenticated2}>
-              <Link href="/my-divar?filter=my-ads">
+            <UserModal onAuthenticated={handleAuthenticatedMyAds}>
                 <MenuItem sx={{ justifyContent: 'center' }} onClick={() => handleClose2()}>آگهی های من</MenuItem>
-              </Link>
             </UserModal>
-            <UserModal onAuthenticated={handleAuthenticated2}>
-              <Link href="/my-divar?filter=my-notes">
+            <UserModal onAuthenticated={handleAuthenticatedMyNotes}>
                 <MenuItem sx={{ justifyContent: 'center' }} onClick={() => handleClose2()}>آگهی های یادداشت شده</MenuItem>
-              </Link>
+            </UserModal>
+            <UserModal onAuthenticated={() => handleClose2()}>
+                <MenuItem sx={{ justifyContent: 'center' }} onClick={() => logout()}>{user ? "خروج" : "ورود" }</MenuItem>
+          
             </UserModal>
             <MenuItem sx={{ justifyContent: 'center', display:"flex" , gap:"0.75rem" }} onClick={() => setDark((prev) => !prev)}>
               <span>{dark ? "حالت روز" : "حالت شب "}</span>
@@ -206,16 +220,12 @@ className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  
     }
   }}
 >
-                   <UserModal onAuthenticated={handleAuthenticated1}>
-                   <Link href="/my-chat">
+                   <UserModal onAuthenticated={handleAuthenticatedMyChat}>
                    <MenuItem sx={{ justifyContent: 'center' }} onClick={() => handleClose()}>چت های من</MenuItem>
-                   </Link>
                    </UserModal>
                    
-                   <UserModal onAuthenticated={handleAuthenticated1}>
-                   <Link href="/my-chat-for-my-ads">
+                   <UserModal onAuthenticated={handleAuthenticatedMyChatForMyAds}>
                    <MenuItem sx={{ justifyContent: 'center' }} onClick={() => handleClose()}>چت آگهی من</MenuItem>
-                   </Link>
                    </UserModal>
 
             
@@ -251,6 +261,42 @@ className=" dark:text-dark-white-secondary  dark:hover:bg-dark-white-light-100  
           <RegisterAd />
         </div>
       </header>
+      <div 
+      className="w-full    dark:bg-dark-gray-50 bg-dark-gray fixed z-50 top-0    lg:hidden py-1 px-5 ">
+      <div 
+      className={`w-full m gap-5 border rounder-lg border-black-hint dark:border-white-hint  dark:bg-dark-black bg-white  flex  flex-1 md:justify-around items-center   ${!isUsedInGallery ? "border-none justify-end" : "justify-between"}`}>
+        <div className={` flex justify-start items-center
+         ${!isUsedInGallery && "hidden"  }`}
+        >
+          <FilterProvidence />
+          <hr
+              className="h-6 w-px  bg-[#dbdbe4]"
+              role="presentation"
+              />
+            </div>
+        <div className={`flex-1 md:self-end 
+        ${!isUsedInGallery && "hidden"}`}
+        >
+        <SearchBar />
+        </div>
+         <Link href="/ads" className={` ${!isUsedInGallery ? "block" : "hidden"}`}>
+               <Image
+                 src="/images/divar.svg"
+                 width={200}
+                 className=" ml-2 cursor-pointer h-10 w-10"
+                 height={200}
+                 alt="divar icon"
+                 />
+             </Link>
+                 </div>  
+                 <div className={`
+        ${!isUsedInGallery && "hidden"}`}
+        >
+                 <ActiveFilterForMobile/>
+
+                 
+                 </div>
+      </div>
     </>
   );
 };

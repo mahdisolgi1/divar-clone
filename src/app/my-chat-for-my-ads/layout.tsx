@@ -1,5 +1,6 @@
 "use client";
 
+import BottomNav from "../_components/BottomNav";
 import Navbar from "../_components/Navbar";
 import { UserProvider } from "../_context/UserContext";
 import "../globals.css";
@@ -15,6 +16,7 @@ export default function ChatLayout({
       <UserProvider>
         <Navbar />
         <main className="mt-28 px-4">{children}</main>
+        <BottomNav />
       </UserProvider>
       </body>
       </html>  );

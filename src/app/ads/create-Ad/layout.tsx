@@ -12,7 +12,6 @@ export default function CreateLayout({
   return (
     <div>
       <UserProvider>
-        <Navbar />
         <main className="mt-28 px-4">{children}</main>
       </UserProvider>
     </div>

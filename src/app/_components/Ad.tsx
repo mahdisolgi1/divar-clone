@@ -6,7 +6,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { CiBookmark } from "react-icons/ci";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import { GoShareAndroid } from "react-icons/go";
-import { MdBookmark, MdBookmarkBorder, MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdBookmark, MdBookmarkBorder, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -28,6 +28,16 @@ import Link from "next/link";
 import { useUser } from "../_context/UserContext";
 import UserModal from "./UserModal";
 
+// Import Swiper React components
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+
+// import required modules
+import { Pagination } from 'swiper/modules';
+
 const Ad: React.FC = () => {
   const [ad, setAd] = useState<AdInterface | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
@@ -42,6 +52,7 @@ const Ad: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [isNoteSaving, setIsNoteSaving] = useState(false);
   const [noteId, setNoteId] = useState<number | null>(null);
+const [isSmallScreen, setIsSmallScreen] = useState(false);
 
 if(user?.id){  
   useEffect(() => {
@@ -163,8 +174,20 @@ if(user?.id){
     }
   };
 
+useEffect(() => {
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth < 640); // Tailwind's sm breakpoint
+  };
+
+  checkScreenSize();
+  window.addEventListener("resize", checkScreenSize);
+  return () => window.removeEventListener("resize", checkScreenSize);
+}, []);
   return (
-    <section className="text-right md:max-w-[960px] lg:max-w-[1024px] m-auto">
+    <section className="text-right md:max-w-[960px] lg:max-w-[1024px] m-auto relative">
+      <Link href="/ads" className="absolute top-0 left-0 lg:hidden">
+      <MdOutlineKeyboardArrowRight className="text-dark-white-secondary p-2 bg-black dark:bg-white  dark:text-black-secondary   w-5" />
+      </Link>
       {loading ? (
         <div className="flex justify-center w-full h-[75vh] items-center">
           <Spinner />
@@ -195,61 +218,81 @@ if(user?.id){
               </>
             )}
           </div>
-          <div className="flex  justify-center  flex-1 gap-5 ">
-            <div className="max-w-[50%] flex flex-col  justify-center  gap-5 mr-[8.33%]">
-              <div className="w-full max-w-3xl mx-auto">
-                <Swiper
-                  modules={[Navigation, Thumbs]}
-                  spaceBetween={20}
-                  slidesPerView={1}
-                  loop={true}
-                  autoplay={{ delay: 2500, disableOnInteraction: false }}
-                  pagination={{ clickable: true }}
-                  navigation
-                  thumbs={{ swiper: thumbsSwiper }}
-                  className="h-64 mb-5"
-                >
-                  {images.map((img, i) => (
-                    <SwiperSlide
-                      key={i}
-                      className="flex items-center justify-center"
-                    >
-                      <Image
-                        width={1500}
-                        height={1000}
-                        src={img || "/images/emptyAdImg.png"}
-                        alt={`Slide ${i + 1}`}
-                        className="h-full w-full object-cover"
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+          <div className="flex flex-col lg:flex-row justify-center  flex-1 gap-5 ">
+            <div className="w-full lg:max-w-[50%] flex flex-col  justify-center  gap-5 mr-[8.33%]">
+            <div className="w-full -z-10 max-w-3xl mx-auto">
+  {/* Main Swiper */}
+  {isSmallScreen ? (
+    <Swiper
+      modules={[Pagination]}
+      pagination={{ clickable: true }}
+      className="h-64 mb-5"
+    >
+      {images.map((img, i) => (
+        <SwiperSlide key={i}>
+          <Image
+            width={1500}
+            height={1000}
+            src={img || "/images/emptyAdImg.png"}
+            alt={`Slide ${i + 1}`}
+            className="h-full w-full object-cover"
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  ) : (
+    <Swiper
+      modules={[Navigation, Thumbs]}
+      spaceBetween={20}
+      slidesPerView={1}
+      loop={true}
+      autoplay={{ delay: 2500, disableOnInteraction: false }}
+      pagination={{ clickable: true }}
+      navigation
+      thumbs={{ swiper: thumbsSwiper }}
+      className="h-64 mb-5"
+    >
+      {images.map((img, i) => (
+        <SwiperSlide key={i} className="flex items-center justify-center">
+          <Image
+            width={1500}
+            height={1000}
+            src={img || "/images/emptyAdImg.png"}
+            alt={`Slide ${i + 1}`}
+            className="h-full w-full object-cover"
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  )}  
 
-                {images.length > 1 && (
-                  <Swiper
-                    modules={[Thumbs]}
-                    onSwiper={setThumbsSwiper}
-                    spaceBetween={10}
-                    slidesPerView={images.length}
-                    watchSlidesProgress
-                    className="mt-4"
-                  >
-                    {images.map((img, i) =>
-                      img ? (
-                        <SwiperSlide key={i} className="cursor-pointer">
-                          <Image
-                            width={1500}
-                            height={1000}
-                            src={img}
-                            alt={`Thumbnail ${i + 1}`}
-                            className="h-16 w-full object-cover"
-                          />
-                        </SwiperSlide>
-                      ) : null
-                    )}
-                  </Swiper>
-                )}
-              </div>
+  {/* Thumbnail Swiper – only for larger screens */}
+  {!isSmallScreen && images.length > 1 && (
+    <Swiper
+      modules={[Thumbs]}
+      onSwiper={setThumbsSwiper}
+      spaceBetween={10}
+      slidesPerView={images.length}
+      watchSlidesProgress
+      className="mt-4"
+    >
+      {images.map((img, i) =>
+        img ? (
+          <SwiperSlide key={i} className="cursor-pointer">
+            <Image
+              width={1500}
+              height={1000}
+              src={img}
+              alt={`Thumbnail ${i + 1}`}
+              className="h-16 w-full object-cover"
+            />
+          </SwiperSlide>
+        ) : null
+      )}
+    </Swiper>
+  )}
+</div>
+      <div className="w-full hidden lg:block">
               <textarea
                 name="notes"
                 id="notes"
@@ -270,7 +313,7 @@ if(user?.id){
                   <button
                     disabled={isNoteSaving}
                     className="px-4 py-2 text-sm bg-[#a62626] text-white rounded hover:bg-[#be3737] disabled:opacity-50"
-                  >
+                    >
                     {isNoteSaving ? "در حال ذخیره..." : "ذخیره"}
                   </button>
                 </UserModal>
@@ -279,8 +322,9 @@ if(user?.id){
                 یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد شد.
               </p>{" "}
               <LocationDisplayer lng={ad.longitude} lat={ad.latitude} />
+                    </div>  
             </div>
-            <div className="flex flex-col gap-5 w-1/2">
+            <div className="flex flex-col gap-5 w-full lg:w-1/2">
               <div className="flex flex-col gap-3 justify-start">
                 <h1 className="text-xl font-medium text-black-primary dark:text-dark-white-primary  ">
                   {ad?.title}
@@ -318,7 +362,7 @@ if(user?.id){
                     </span>
                   </UserModal>
                 </div>
-                <div className="flex justify-center items-center gap-5">
+                <div className="hidden w-full lg:flex  justify-center items-center gap-5">
                  <Link href={`/chat?adID=${ad.id}`}> <Button
                     variant="contained"
                     sx={{ background: "white", color: " rgba(0, 0, 0, 0.56)" }}
@@ -396,7 +440,7 @@ if(user?.id){
                     {" "}
                     {ad.openToExchange ? "هستم" : "نیستم"}
                   </span>
-                  <span className="text-black-secondary dark:text-dark-white-secondary text-base">
+                  <span className=" dark:text-dark-white-secondary text-black-secondary text-base">
                     مایل به معاوضه
                   </span>
                 </div>
@@ -413,9 +457,39 @@ if(user?.id){
               <p className="text-[0.875rem] text-black-primary dark:text-dark-white-primary ">
                 {ad.description}
               </p>
-            </div>
+            </div>    <div className="w-full  lg:hidden">
+              <textarea
+                name="notes"
+                id="notes"
+                className="w-full text-right border h-32 p-3 resize-none text-black-primary dark:text-dark-white-primary "
+                placeholder="یادداشت شما..."
+                value={note}
+                onChange={handleNoteChange}
+              />
+              <div className="flex justify-end gap-2 mt-2">
+                <button
+                  onClick={handleCancelNote}
+                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+                  disabled={isNoteSaving}
+                >
+                  انصراف
+                </button>
+                <UserModal onAuthenticated={handleSaveNote}>
+                  <button
+                    disabled={isNoteSaving}
+                    className="px-4 py-2 text-sm bg-[#a62626] text-white rounded hover:bg-[#be3737] disabled:opacity-50"
+                    >
+                    {isNoteSaving ? "در حال ذخیره..." : "ذخیره"}
+                  </button>
+                </UserModal>
+              </div>
+              <p className="text-black-secondary dark:text-dark-white-secondary text-xs mt-2">
+                یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد شد.
+              </p>{" "}
+              <LocationDisplayer lng={ad.longitude} lat={ad.latitude} />
+                    </div>  
           </div>
-          <div className="mt-[128px] py-4 flex justify-between items-center">
+          <div className="hidden lg:flex mt-[128px] py-4  justify-between items-center">
             <div className="flex gap-5 justify-center items-center w-full">
               <FaLinkedin className="text-black-secondary dark:text-dark-white-secondary  w-5" />
               <FaTwitter className="text-black-secondary dark:text-dark-white-secondary w-5" />
@@ -439,6 +513,24 @@ if(user?.id){
           </div>
         </>
       )}
+      <div className="fixed  w-full flex lg:hidden justify-center flex-1 gap-5">
+                 <Link href={`/chat?adID=${id}`} className=" w-1/2"> <Button
+                    variant="contained"
+                    sx={{ background: "white", color: " rgba(0, 0, 0, 0.56)" }}
+                    className="hover:bg-black/5 dark:hover:bg-white/5 text-black-secondary dark:text-dark-white-secondary hover:shadow-none  whitespace-nowrap bg-transparent text-content-primary"
+                  >
+                    چت
+                  </Button>
+                  </Link>
+                  <Button
+                    onClick={() => setToggleNumber(true)}
+                    variant="contained"
+                    sx={{ background: "#a62626" }}
+                    className="hover:bg-[#be3737] hover:shadow-none  whitespace-nowrap  w-1/2"  
+                  >
+                    تماس
+                  </Button>
+                </div>
     </section>
   );
 };

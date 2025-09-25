@@ -4,6 +4,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import { MdOutlineHomeWork } from "react-icons/md";
 import AdInGallery from "./AdInGallery";
+import { motion } from "framer-motion";
 
 import { Ad } from "../_types/modalTypes";
 import { useEffect, useState } from "react";
@@ -13,13 +14,15 @@ import AdStatusFilter from "./AdStatusFilter";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import CategoryFilter from "./CategoryFilter";
+import { IoMdArrowBack } from "react-icons/io";
+import  MobileCat  from "./MobileCat";
+import { useFilter } from "../_context/FilterContext";
 const Gallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [isExchangeOpen, setIsExchangeOpen] = useState<boolean>(false);
-  const [status, setStatus] = useState("");
-  const [minPrice, setMinPrice] = useState<string>("");
-  const [maxPrice, setMaxPrice] = useState<string>("");
+
+  const { isExchangeOpen,maxPrice,minPrice,setIsExchangeOpen,setMaxPrice,setMinPrice,setStatus,status, isFilterModalOpen,setIsFilterModalOpen} = useFilter();
+
   const searchParams = useSearchParams();
   const province = searchParams ? searchParams.get("province") : "";
   const city = searchParams ? searchParams.get("city") || "" : "";
@@ -27,6 +30,7 @@ const Gallery: React.FC = () => {
   const activeSub1 = searchParams ? searchParams.get("subCategory1") || "" : "";
   const activeSub2 = searchParams ? searchParams.get("subCategory2") || "" : "";
   const titleSearch = searchParams ? searchParams.get("query") || "" : "";
+
 
   useEffect(() => {
     const handleFilter = async () => {
@@ -69,16 +73,18 @@ const Gallery: React.FC = () => {
   return (
     <section className="flex relative justify-center gap-12">
       <div>
-        <p className="text-right text-black-secondary dark:text-dark-white-secondary mb-4">
+        {!activeCategory && <MobileCat setIsFilterModalOpen={setIsFilterModalOpen}/>}
+        <p className="text-center lg:text-right text-black-secondary dark:text-dark-white-secondary mb-4">
           انواع آگهی‌ها و نیازمندی های {province || "ایران"}
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 max-w-7xl min-w-2xl ">
+        <div className="grid  grid-cols-1 md:grid-cols-2 pt-2 pb-20 lg:pt-0 lg:pb-0 lg:grid-cols-3 gap-4 max-w-7xl min-w-2xl ">
           <AdInGallery ads={ads} loading={loading} />
         </div>
       </div>
 
-      <div className=" right-0 top-0 w-1/8 mb-[0.25rem] h-screen flex flex-col gap-3 overflow-y-auto filter-section pb-[20px]">
-     <CategoryFilter/>
+      {/* Sidebar for md+ screens */}
+      <div className="right-0  top-0 w-1/8 mb-[0.25rem] h-screen flex-col gap-3 overflow-y-auto filter-section pb-[20px] hidden lg:flex">
+        <CategoryFilter/>
         <div className="relative">
           <PriceFilter
             maxPrice={maxPrice}
@@ -197,6 +203,13 @@ const Gallery: React.FC = () => {
           </div>
         </div>
       </div>
+
+ 
+      {/* Button for small screens to open modal */}
+
+
+      {/* Modal for small screens */}
+      
     </section>
   );
 };

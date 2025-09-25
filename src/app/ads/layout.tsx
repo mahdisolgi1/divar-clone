@@ -3,20 +3,27 @@
 import Navbar from "../_components/Navbar";
 import { UserProvider } from "../_context/UserContext";
 import "../globals.css";
-
+import BottomNav from "../_components/BottomNav";
+import { usePathname } from "next/navigation";
+import { FilterProvider } from "../_context/FilterContext";
 export default function AdsLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) {  const pathname = usePathname();
+  const isUsedInGallery = pathname === "/ads";
+
+  
   return ( 
-       <html className="dark" lang="en">
+       <html  lang="en">
       <body className="dark:bg-black bg-white"> 
 
-    
-      <UserProvider>
-        <Navbar isUsedInGallery={true}/>
+    <FilterProvider>
+        <Navbar isUsedInGallery={isUsedInGallery}/>
         <main className="mt-20 px-4">{children}</main>
+     <BottomNav />
+      
+    
       </UserProvider>
     
       </body>

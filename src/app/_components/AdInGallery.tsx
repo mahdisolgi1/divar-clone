@@ -39,29 +39,35 @@ const AdInGallery: React.FC<AdInGalleryProps> = ({ loading, ads }) => {
             key={ad?.id}
             className="flex cursor-pointer  dark:border  dark:border-[#2c2c2c] shadow-[0_0_0_1px_rgba(0,0,0,0.12)] p-4 w-[350px] h-[170px] justify-between  dark:border-spacing-1 transition-shadow rounded-sm "
           >
-            <div className="flex w-[160px] h-full gap-1">
-              {ad.img1 ? (
-                <Image
-                  width={170}
-                  height={180}
-                  className="w-full h-full object-cover rounded-md"
-                  src={ad.img1}
-                  alt={ad.title}
-                />
-              ) : (
-                <Image
-                  width={170}
-                  height={180}
-                  className="w-full h-full object-cover rounded-md"
-                  src="/images/emptyAdImg.png"
-                  alt="Default image"
-                />
-              )}
-              <FiMessageCircle
-                size={25}
-                className="self-end text-black-secondary dark:text-dark-white-secondary"
-              />
-            </div>
+  <div className="flex w-[150px] h-[140px] gap-1">
+  <div className="flex-shrink-0 w-[120px] h-full overflow-hidden rounded-md">
+    {ad.img1 ? (
+      <Image
+        width={170}
+        height={180}
+        className="w-full h-full object-cover object-center"
+        src={ad.img1}
+        alt={ad.title}
+      />
+    ) : (
+      <Image
+        width={170}
+        height={180}
+        className="w-full h-full object-cover"
+        src="/images/emptyAdImg.png"
+        alt="Default image"
+      />
+    )}
+  </div>
+
+  <div className="flex items-end">
+    <FiMessageCircle
+      size={25}
+      className="text-black-secondary dark:text-dark-white-secondary"
+    />
+  </div>
+</div>
+
 
             <div className="flex flex-col justify-between w-[calc(100%-180px)]">
               <h2 className="text-right text-black-primary dark:text-dark-white-primary text-base line-clamp-2">

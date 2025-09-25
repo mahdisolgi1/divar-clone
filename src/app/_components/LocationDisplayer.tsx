@@ -39,7 +39,7 @@ const LocationDisplayer: React.FC<LocationDisplayerProps> = ({
   };
 
   return (
-    <div>
+    <div className="relative -z-10">
       <div onClick={handleClick} className="w-full h-64 cursor-pointer">
         <MapContainer
           center={[lat, lng]}

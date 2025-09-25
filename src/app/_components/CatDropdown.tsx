@@ -104,11 +104,11 @@ const cates= [ "املاک",
   }
 
   return (
-    <div className="w-full me-auto text-right flex gap-1 flex-col">
+    <div className="w-full me-auto text-right flex bg-white dark:bg-dark-white-light-200 gap-1 flex-col">
       <h3 className="text-base text-black-primary dark:text-dark-white-primary pr-1">دسته</h3>
       <div className="relative w-full mx-auto cursor-pointer" ref={dropdownRef}>
         <div
-          className="flex items-center w-full justify-between px-4 py-2 bg-white border hover:border-black-dark-100 border-black-medium-100 dark:border-dark-white-medium-100 rounded-md cursor-pointer  hover:bg-gray-50 dark:hover:bg-dark-gray-50"
+          className="flex items-center w-full justify-between px-4 py-2 bg-white dark:bg-dark-white-light-200 border hover:border-black-dark-100 border-black-medium-100 dark:border-dark-white-medium-100 rounded-md cursor-pointer  hover:bg-gray-50 dark:hover:bg-dark-gray-50"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className={`arrow transform transition-transform ${isOpen ? "rotate-180" : ""}`}>
@@ -120,7 +120,7 @@ const cates= [ "املاک",
         </div>
 
         {isOpen && (
-          <ul className="absolute z-40 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+          <ul className="absolute z-40 mt-1 w-full bg-white dark:bg-dark-white-light-200 border border-gray-300 rounded-md shadow-lg">
             {cates.map((category, index) => (
               <li
                 key={index}
@@ -134,7 +134,7 @@ const cates= [ "املاک",
         )}
 
         {isSubCategory1Open && selectedCategory && (
-          <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+          <ul className="absolute z-10 mt-1 w-full bg-white dark:bg-dark-white-light-200 border border-gray-300 rounded-md shadow-lg">
             {subCategories1.map((subCategory1, index) => (
               <li
                 key={index}
@@ -148,7 +148,7 @@ const cates= [ "املاک",
         )}
 
         {isSubCategory2Open && selectedCategory && selectedSubCategory1 && (
-          <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+          <ul className="absolute z-10 mt-1 w-full bg-white dark:bg-dark-white-light-200 border border-gray-300 rounded-md shadow-lg">
             {subCategories2.map((subCategory2, index) => (
               <li
                 key={index}

@@ -64,13 +64,12 @@ const SearchBar: React.FC = () => {
     router.push(url.toString());
   };
   return (
-    <div className="relative w-full max-w-md ">
+    <div className="relative w-full md:max-w-md ">
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         type="text"
-        className="bg-[#f0f0f1] dark:bg-dark-white-light-200 pr-8 rounded-lg px-4 py-2 md:w-[25rem] lg:w-[30rem] text-black-primary dark:text-dark-white-primary placeholder:text-right text-right pl-10"
-        placeholder="جستجو در همه آگهی ها"
+        className="dark:bg-dark-black bg-white lg:bg-[#f0f0f1] lg:dark:bg-dark-white-light-200 pr-8 rounded-lg px-4 py-2  md:w-[25rem] lg:w-[30rem] text-black-primary dark:text-dark-white-primary placeholder:text-right text-right pl-10 w-full"        placeholder="جستجو در همه آگهی ها"
       />
       <IoIosSearch
         onClick={() => router.push(`/search?query=${query}`)}
@@ -86,21 +85,21 @@ const SearchBar: React.FC = () => {
       )}
 
       {showDropdown && results.length > 0 && (
-        <div className="absolute p-4 md:w-[25rem] gap-2  lg:w-[30rem] bg-white border border-gray-300 rounded-lg mt-1 shadow-lg z-10 max-h-60 overflow-y-auto">
+        <div className="absolute p-4  md:w-[25rem] gap-2  lg:w-[30rem] bg-white dark:bg-black border border-gray-300 rounded-lg mt-1 shadow-lg z-10 max-h-60 overflow-y-auto">
          
           {results.map((ad) => (
             <Link
               href={`/ads/${ad.id.toString()}`}
               key={ad.id}
-              className="px-4 flex justify-around items-center placeholder: text-black-secondary dark:text-dark-white-secondary py-2 text-right  cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-gray-100"
+              className="px-4 w-full flex justify-around items-center placeholder: text-black-secondary dark:text-dark-white-secondary py-2 text-right  cursor-pointer hover:bg-gray-100 dark:hover:bg-dark-gray-100"
               onClick={() => setShowDropdown(false)}
             >   
-                <div className="flex flex-col justify-around items-center">
+                <div className="flex w-full justify-around items-center">
 
+              <span>{ad?.category?.subCategory1 || 'بدون دسته‌بندی'}</span>
               <span>
                 {ad.title}
                 </span>
-              <span>{ad?.category?.subCategory1 || 'بدون دسته‌بندی'}</span>
            
                 </div>
             </Link>

@@ -80,7 +80,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
           isOpen ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className=" pb-4 flex flex-col gap-4 items-end">
+        <div className=" pb-4 flex  lg:flex-col gap-4 items-end">
           <div className="relative w-full">
             <input
               onKeyDown={handleKeyDown}

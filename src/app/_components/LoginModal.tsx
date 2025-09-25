@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useUser } from "../_context/UserContext";
+import { IoClose } from "react-icons/io5";
 
 interface LoginModalProps {
   open: boolean;
@@ -51,9 +52,17 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose,openSignUp })
       
       <Box sx={{
           ...modalStyle,
-          width: { xs: '90%', sm: '400px' },
+          width: { xs: '90%', lg: '400px' },
+          height: { xs: '90%', lg: 'auto' },
           maxWidth: '500px',
-        }}>.
+          display:{xs :"flex" ,lg: "block" },
+          justifyContent: "center",
+          flexDirection:"column",
+          alignItems:"center",
+          position:{xs: "relative", lg: "static"}
+
+        }}
+        className="relative lg:static">
 
           <Typography
             variant="h6"
@@ -61,6 +70,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ open, handleClose,openSignUp })
           >
             ورود به حساب کاربری
           </Typography>
+          <Button className="absolute lg:hidden top-5 left-5 " onClick={()=>handleClose()}> 
+            <IoClose className="text-base text-black-primary dark:text-dark-white-primary"/>
+          </Button>
           <TextField
             label="ایمیل"
             variant="outlined"

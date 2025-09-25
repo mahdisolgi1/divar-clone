@@ -20,7 +20,7 @@ export default function RootLayout({
     <html className="dark" lang="en">
       <body className="dark:bg-black bg-white"> 
       <UserProvider>
-          <main className="mt-28">{children}</main>
+          <main className="mt-10 md:mt-28">{children}</main>
         </UserProvider>
       </body>
     </html>

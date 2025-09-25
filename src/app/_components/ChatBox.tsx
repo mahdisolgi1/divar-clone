@@ -113,7 +113,7 @@ const ChatBox: React.FC = () => {
     }, [adID]);
 
     const handleAdSelect = (adId: number) => {
-        router.push(`/chat?adID=${adId}`);
+        router.push(`/my-chat?adID=${adId}`);
     };
 
     const handleSendMessage = async () => {
@@ -153,9 +153,9 @@ const ChatBox: React.FC = () => {
     };
 
   return (
-        <div className="border border-black-divider dark:border-dark-white-divider max-w-[1024px] mx-auto h-[80vh] flex ">
+        <div className="lg:border lg:border-black-divider lg:dark:border-dark-white-divider w-full h-full lg:max-w-[1024px] mx-auto lg:h-[80vh] flex ">
             {/* Left side - Chat area */}
-            <div className="flex-1 flex flex-col border-l border-black-divider dark:border-dark-white-divider">
+            <div className={`${adID ? 'flex' : 'hidden'} flex-1 flex flex-col border-l border-black-divider dark:border-dark-white-divider`}>
                 {adID ? (
                     <>
                         {chats.length > 0 && (
@@ -225,8 +225,8 @@ const ChatBox: React.FC = () => {
             </div>
 
             {/* Right side - Ads list */}
-            <div className="w-1/3 p-4">
-                <h2 className="text-[0.875rem] text-black-primary dark:text-dark-white-primary mb-4">گفتگوهای من</h2>
+            <div className={`w-full h-full lg:h-auto lg:w-1/3 p-4 ${adID ? "hidden lg:block" : "block"}`}>
+                <h2 className="text-[0.875rem] text-black-primary dark:text-dark-white-primary text-right lg:text-left mb-4">گفتگوهای من</h2>
                 {selectedAdDetails && (
                     <div className="mb-4 p-4 bg-white rounded-lg shadow">
                         <div className="flex items-center gap-4">
@@ -254,7 +254,7 @@ const ChatBox: React.FC = () => {
                         </div>
                     </div>
                 )}
-                <div className="space-y-4 flex flex-col-reverse gap-2">
+                <div className="space-y-4 w-full flex flex-col-reverse gap-2">
                     {userAds.map((ad) => (
                         <div 
                             key={ad.id}
