@@ -2,9 +2,7 @@
 import Image from "next/image";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
-import { MdOutlineHomeWork } from "react-icons/md";
 import AdInGallery from "./AdInGallery";
-import { motion } from "framer-motion";
 
 import { Ad } from "../_types/modalTypes";
 import { useEffect, useState } from "react";
@@ -14,14 +12,13 @@ import AdStatusFilter from "./AdStatusFilter";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import CategoryFilter from "./CategoryFilter";
-import { IoMdArrowBack } from "react-icons/io";
 import  MobileCat  from "./MobileCat";
 import { useFilter } from "../_context/FilterContext";
 const Gallery: React.FC = () => {
   const [ads, setAds] = useState<Ad[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const { isExchangeOpen,maxPrice,minPrice,setIsExchangeOpen,setMaxPrice,setMinPrice,setStatus,status, isFilterModalOpen,setIsFilterModalOpen} = useFilter();
+  const { isExchangeOpen,maxPrice,minPrice,setIsExchangeOpen,setMaxPrice,setMinPrice,setStatus,status,setIsFilterModalOpen} = useFilter();
 
   const searchParams = useSearchParams();
   const province = searchParams ? searchParams.get("province") : "";

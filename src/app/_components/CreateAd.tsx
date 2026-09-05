@@ -25,7 +25,7 @@ import PhoneInput from "./PhoneInput";
 import { Button } from "@mui/material";
 import OTECheckBox from "./OTECheckBox";
 import { createAd, getCatesByID } from "../_lib/data-service";
-import { Ad, Category } from "../_types/modalTypes";
+import {  Category } from "../_types/modalTypes";
 import { useUser } from "../_context/UserContext";
 
 const iconMap: Record<string, React.FC<{ className?: string }>> = {

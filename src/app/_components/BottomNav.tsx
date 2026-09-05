@@ -5,15 +5,12 @@ import Link from 'next/link'
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from 'react';
 import { CiBookmark, CiCirclePlus, CiUser } from 'react-icons/ci'
-import { FiMessageCircle } from 'react-icons/fi'
-import { MdHome } from 'react-icons/md'
 import UserModal from './UserModal';
 import { Button, Menu, MenuItem } from '@mui/material';
 import { FaBookmark, FaMoon, FaPlusCircle, FaSun, FaUser } from 'react-icons/fa';
 import { IoHome, IoHomeOutline } from 'react-icons/io5';
 import { useUser } from '../_context/UserContext';
-import { BiCommentDots } from 'react-icons/bi';
-import { BsCCircleFill, BsChat, BsChatFill } from 'react-icons/bs';
+import {  BsChat, BsChatFill } from 'react-icons/bs';
 
 export default function BottomNav() {
  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

@@ -1,5 +1,5 @@
 // // import { eachDayOfInterval } from "date-fns";
-import { Ad, Chat } from "../_types/modalTypes";
+import { Ad } from "../_types/modalTypes";
 import { supabase } from "./supabase";
 
 // /////////////
@@ -974,7 +974,7 @@ export const toggleSavedAd = async (userId: string, adId: number) => {
         .single();
       
       if (error) throw error;
-      return true;
+      return data;
     }
   } catch (error) {
     console.error('Error toggling saved ad:', error);

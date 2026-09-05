@@ -14,11 +14,10 @@ import { LuDices } from "react-icons/lu";
 import { HiOutlineUsers } from "react-icons/hi";
 import { MdKeyboardArrowDown, MdOutlineHomeWork } from "react-icons/md";
 import { IconType } from "react-icons";
-import { IoMdClose } from "react-icons/io";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@mui/material";
 import Image from "next/image";
-import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {  FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Spinner from "./Spinner";
 
 interface CategoryItem {
@@ -101,13 +100,7 @@ const CategoryFilterForNavbar: React.FC = () => {
     new Set(subCategories.map((item) => item.subCategory1))
   );
 
-  const uniqueSubCategories2 = Array.from(
-    new Set(
-      subCategories
-        .map((item) => item.subCategory2)
-        .filter((item): item is string => item !== undefined)
-    )
-  );
+
 
   const categories: Category[] = [
     {
@@ -206,11 +199,7 @@ const CategoryFilterForNavbar: React.FC = () => {
     router.push(url.toString());
   };
 
-  const getIconStyle = (isActive: boolean) => ({
-    fontSize: "1.25rem",
-    color: isActive ? "rgba(0, 0, 0, 0.75)" : "rgba(0, 0, 0, 0.56)",
-    fontWeight: isActive ? 600 : 400,
-  });
+
 
 
 

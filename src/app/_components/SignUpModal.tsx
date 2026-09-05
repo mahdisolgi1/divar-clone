@@ -4,11 +4,9 @@ import {
   TextField,
   Button,
   Typography,
-  Snackbar,
   CircularProgress,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import LoginModal from "./LoginModal";
 import { useUser } from "../_context/UserContext";
 import { IoClose } from "react-icons/io5";
 
@@ -96,11 +94,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ open, handleClose,openLogin }
     openLogin();
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !loading) {
-      handleSignUp();
-    }
-  };
+
 
   return (
     <>

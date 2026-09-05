@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/app/_components/Navbar";
 import "../../globals.css";
 import { UserProvider } from "@/app/_context/UserContext";
 

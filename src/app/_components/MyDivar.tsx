@@ -1,10 +1,6 @@
 "use client";
-import Image from "next/image";
-import { AiFillInstagram } from "react-icons/ai";
-import { FaLinkedin, FaTwitter } from "react-icons/fa";
-import { MdOutlineHomeWork } from "react-icons/md";
 import AdInGallery from "./AdInGallery";
-import { Ad, MyNote, MySavedAd } from "../_types/modalTypes";
+import { Ad } from "../_types/modalTypes";
 import { useEffect, useState } from "react";
 import { getAdByUserID, getMyNotes, getMySavedAds } from "../_lib/data-service";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,7 +8,6 @@ import { useUser } from "../_context/UserContext";
 import MyAd from "./MyAd";
 
 const MyDivar: React.FC = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const filter = searchParams.get('filter');
   const { user } = useUser();

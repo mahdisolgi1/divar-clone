@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { place } from "../_types/modalTypes";
 import { getPlace, getCitiesByProvince } from "../_lib/data-service";
 import { FaChevronDown } from "react-icons/fa";
 import LeafletMap from "./LocationGetterLeafnet";

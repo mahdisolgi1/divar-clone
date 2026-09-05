@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {  useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
 import { useUser } from "../_context/UserContext";
@@ -219,7 +219,8 @@ const ChatBoxForAd: React.FC = () => {
                                     />
                                 )}
                                 <div className="flex-1">
-                                    <h3 className="text-black-primary dark:text-dark-white-primary text-sm">{ad.title}</h3>
+                                    <h3 className="text-black-primary dark:text-dark-white-primary text-sm">  {loading ? "Loading..." : ad.title}
+</h3>
                                     <p className="text-black-secondary dark:text-dark-white-secondary text-xs">{ad.userEmail}</p>
                                 </div>
                             </div>

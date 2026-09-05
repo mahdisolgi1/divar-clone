@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { IoMdArrowBack, IoMdClose } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io";
 import { getPlace, getCitiesByProvince } from "../_lib/data-service";
 import { place } from "../_types/modalTypes";
 import { useRouter } from "next/navigation";

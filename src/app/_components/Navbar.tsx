@@ -5,7 +5,6 @@ import Link from "next/link";
 import { CiUser } from "react-icons/ci";
 import { FiMessageCircle } from "react-icons/fi";
 import { GrSupport } from "react-icons/gr";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import FilterProvidence from "./FilterProvidence";
 import RegisterAd from "./RegisterAd";
