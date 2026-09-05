@@ -3,7 +3,6 @@
 import { Button, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
-import { CiBookmark } from "react-icons/ci";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import { GoShareAndroid } from "react-icons/go";
 import { MdBookmark, MdBookmarkBorder, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -19,7 +18,7 @@ import { getAd, getMyNotesForAd, getMySavedAdsForAd, updateNote, deleteNote, tog
 import { useParams } from "next/navigation";
 import { BiCopy } from "react-icons/bi";
 import Image from "next/image";
-import { Ad as AdInterface, MyNote } from "../_types/modalTypes";
+import { Ad as AdInterface } from "../_types/modalTypes";
 import PersianRelativeTime from "./PersianRelativeTime";
 import LocationDisplayer from "./LocationDisplayer";
 import Spinner from "./Spinner";
@@ -53,46 +52,48 @@ const Ad: React.FC = () => {
   const [isNoteSaving, setIsNoteSaving] = useState(false);
   const [noteId, setNoteId] = useState<number | null>(null);
 const [isSmallScreen, setIsSmallScreen] = useState(false);
+useEffect(() => {
+  const checkIfSaved = async () => {
+    if (!user?.id || !id) return;
 
-if(user?.id){  
-  useEffect(() => {
-      const checkIfSaved = async () => {
-          if (!user?.id || !id) return;
-          try {
-              const savedAd = await getMySavedAdsForAd(user.id, Number(id));
-              setIsSaved(!!savedAd);
-          } catch (error) {
-              console.error('Error checking saved status:', error);
-              setIsSaved(false);
-          }
-      };
-      checkIfSaved();
-  }, [user?.id, id]);
+    try {
+      const savedAd = await getMySavedAdsForAd(user.id, Number(id));
+      setIsSaved(!!savedAd);
+    } catch (error) {
+      console.error("Error checking saved status:", error);
+      setIsSaved(false);
+    }
+  };
 
-  useEffect(() => {
-      const showUserNotesForAds = async () => {
-          if (!user?.id || !id) return;
-          try {
-              const savedNoteAd = await getMyNotesForAd(user.id, Number(id));
-              if (savedNoteAd) {
-                  setNote(savedNoteAd.note || "");
-                  setOriginalNote(savedNoteAd.note || "");
-                  setNoteId(savedNoteAd.id);
-              } else {
-                  setNote("");
-                  setOriginalNote("");
-                  setNoteId(null);
-              }
-          } catch (error) {
-              console.error('Error fetching notes:', error);
-              setNote("");
-              setOriginalNote("");
-              setNoteId(null);
-          }
-      };
-      showUserNotesForAds();
-  }, [user?.id, id]);
-}
+  checkIfSaved();
+}, [user?.id, id]);
+
+useEffect(() => {
+  const showUserNotesForAds = async () => {
+    if (!user?.id || !id) return;
+
+    try {
+      const savedNoteAd = await getMyNotesForAd(user.id, Number(id));
+
+      if (savedNoteAd) {
+        setNote(savedNoteAd.note || "");
+        setOriginalNote(savedNoteAd.note || "");
+        setNoteId(savedNoteAd.id);
+      } else {
+        setNote("");
+        setOriginalNote("");
+        setNoteId(null);
+      }
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+      setNote("");
+      setOriginalNote("");
+      setNoteId(null);
+    }
+  };
+
+  showUserNotesForAds();
+}, [user?.id, id]);
   async function handleCopy(phoneNumber: number) {
     try {
       await navigator.clipboard.writeText(phoneNumber?.toString());

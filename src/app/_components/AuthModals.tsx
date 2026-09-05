@@ -5,7 +5,7 @@ interface AuthModalsProps {
     open: boolean;
     handleClose: () => void;
   }
-  const AuthModals = ({open ,handleClose}:AuthModalsProps)        => {
+  const AuthModals = ({open }:AuthModalsProps)        => {
     const [openLogin, setOpenLogin] = useState(true);
     const [openSignUp, setOpenSignUp] = useState(false);
   

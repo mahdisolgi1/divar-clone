@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {  useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdArrowUpward } from "react-icons/md";
 import { useUser } from "../_context/UserContext";
@@ -248,8 +248,9 @@ const ChatBox: React.FC = () => {
                                 />
                             )}
                             <div>
-                                <h3 className="font-medium">{selectedAdDetails.title}</h3>
-                                <p className="text-sm text-gray-500">{selectedAdDetails.userEmail}</p>
+<h3 className="font-medium">
+  {loading ? "Loading..." : selectedAdDetails.title}
+</h3>                                <p className="text-sm text-gray-500">{selectedAdDetails.userEmail}</p>
                             </div>
                         </div>
                     </div>
