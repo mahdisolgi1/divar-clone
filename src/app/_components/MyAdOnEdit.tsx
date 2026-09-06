@@ -4,18 +4,18 @@ import { useParams, useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import React from "react";
-import { MdOutlineHomeWork } from "react-icons/md";
-import {
-  PiCarLight,
-  PiOfficeChairBold,
-  PiPaintBrushBroadLight,
-  PiToolboxLight,
-} from "react-icons/pi";
-import { CgSmartphone } from "react-icons/cg";
-import { BsLamp } from "react-icons/bs";
-import { FiWatch } from "react-icons/fi";
-import { LuDices } from "react-icons/lu";
-import { HiOutlineUsers } from "react-icons/hi";
+// import { MdOutlineHomeWork } from "react-icons/md";
+// import {
+//   PiCarLight,
+//   PiOfficeChairBold,
+//   PiPaintBrushBroadLight,
+//   PiToolboxLight,
+// } from "react-icons/pi";
+// import { CgSmartphone } from "react-icons/cg";
+// import { BsLamp } from "react-icons/bs";
+// import { FiWatch } from "react-icons/fi";
+// import { LuDices } from "react-icons/lu";
+// import { HiOutlineUsers } from "react-icons/hi";
 import ProvinceDropDown from "./ProvincDropDown";
 import ImageUploader from "./ImageUploader";
 import PriceInput from "./PriceInput";
@@ -24,7 +24,7 @@ import PhoneInput from "./PhoneInput";
 import { Button } from "@mui/material";
 import OTECheckBox from "./OTECheckBox";
 import {  getAd, updateAd, getSubCates1, getSubCates2 } from "../_lib/data-service";
-import { Category } from "../_types/modalTypes";
+// import { Category } from "../_types/modalTypes";
 import { useUser } from "../_context/UserContext";
 
 // const iconMap: Record<string, React.FC<{ className?: string }>> = {
