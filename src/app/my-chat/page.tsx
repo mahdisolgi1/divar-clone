@@ -1,11 +1,11 @@
-// import ChatBox from "../_components/ChatBox";
-
-import { div } from "framer-motion/client";
+import ChatBox from "../_components/ChatBox";
 
 const page: React.FC = () => {
   return (
-   <div>s</div>
-{/* <ChatBox /> */}
+    <div>
+zC
+    {/* <ChatBox /> */}
+    </div>
   );
 };
 
