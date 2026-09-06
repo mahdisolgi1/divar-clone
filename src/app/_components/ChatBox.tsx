@@ -144,7 +144,7 @@ const ChatBox: React.FC = () => {
             // Refresh chats after sending message
             const updatedChats = await getBuyerChats(user.id);
             const selectedAdChats = updatedChats
-                .filter(chat => chat.ad.id === Number(adID))
+                .filter(chat => chat.id.id === Number(adID))
                 .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
             setChats(selectedAdChats);
         } catch (error) {
