@@ -1,4 +1,4 @@
-import ChatBox from "../_components/ChatBox";
+// import ChatBox from "../_components/ChatBox";
 
 const page: React.FC = () => {
   return (
