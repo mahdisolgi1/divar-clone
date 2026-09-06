@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { FaChevronDown } from "react-icons/fa";
 import React from "react";
 import { MdOutlineHomeWork } from "react-icons/md";
@@ -25,21 +24,21 @@ import PhoneInput from "./PhoneInput";
 import { Button } from "@mui/material";
 import OTECheckBox from "./OTECheckBox";
 import {  getAd, updateAd, getSubCates1, getSubCates2 } from "../_lib/data-service";
-import { Ad, Category } from "../_types/modalTypes";
+import { Category } from "../_types/modalTypes";
 import { useUser } from "../_context/UserContext";
 
-const iconMap: Record<string, React.FC<{ className?: string }>> = {
-  املاک: MdOutlineHomeWork,
-  "وسایل نقلیه": PiCarLight,
-  "کالای دیجیتال": CgSmartphone,
-  "خانه و آشپزخانه": BsLamp,
-  خدمات: PiPaintBrushBroadLight,
-  "وسایل شخصی": FiWatch,
-  "سرگرمی و فراغت": LuDices,
-  اجتماعی: HiOutlineUsers,
-  "تجهیزات و صنعتی": PiOfficeChairBold,
-  "استخدام و کاریابی": PiToolboxLight,
-};
+// const iconMap: Record<string, React.FC<{ className?: string }>> = {
+//   املاک: MdOutlineHomeWork,
+//   "وسایل نقلیه": PiCarLight,
+//   "کالای دیجیتال": CgSmartphone,
+//   "خانه و آشپزخانه": BsLamp,
+//   خدمات: PiPaintBrushBroadLight,
+//   "وسایل شخصی": FiWatch,
+//   "سرگرمی و فراغت": LuDices,
+//   اجتماعی: HiOutlineUsers,
+//   "تجهیزات و صنعتی": PiOfficeChairBold,
+//   "استخدام و کاریابی": PiToolboxLight,
+// };
 
 const categories = [
   "املاک",
@@ -67,7 +66,7 @@ const MyAdOnEdit: FC = () => {
   const [img3, setImg3] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isOTEChecked, setIsOTEChecked] = useState<boolean>(false);
-  const [categoryDetail, setCategoryDetail] = useState<Category | null>(null);
+  // const [categoryDetail, setCategoryDetail] = useState<Category | null>(null);
   const { cat, id } = useParams();
   const { user } = useUser();
   const router = useRouter();
@@ -105,7 +104,7 @@ const MyAdOnEdit: FC = () => {
           setImg2(adData.img2);
           setImg3(adData.img3);
           setIsOTEChecked(adData.openToExchange);
-          setCategoryDetail(adData.category);
+          // setCategoryDetail(adData.category);
           setSelectedCategory(adData.category.category);
           setSelectedSubCategory1(adData.category.subCategory1);
         }

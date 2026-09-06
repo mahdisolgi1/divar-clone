@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import { useFilter } from "../_context/FilterContext";
 import AdStatusFilter from "./AdStatusFilter";
 import PriceFilter from "./PriceFilter";

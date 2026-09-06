@@ -3,7 +3,7 @@ import AdInGallery from "./AdInGallery";
 import { Ad } from "../_types/modalTypes";
 import { useEffect, useState } from "react";
 import { getAdByUserID, getMyNotes, getMySavedAds } from "../_lib/data-service";
-import { useRouter, useSearchParams } from "next/navigation";
+import {  useSearchParams } from "next/navigation";
 import { useUser } from "../_context/UserContext";
 import MyAd from "./MyAd";
 
