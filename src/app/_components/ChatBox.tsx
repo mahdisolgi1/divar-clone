@@ -31,7 +31,7 @@ const ChatBox: React.FC = () => {
             try {
                 const chatsData = await getBuyerChats(user.id);
                 const selectedAdChats = chatsData
-                    .filter(chat => chat.ad.id === Number(adID))
+                    .filter(chat => chat.id.id === Number(adID))
                     .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
     
                 if (selectedAdChats.length === 0) {
