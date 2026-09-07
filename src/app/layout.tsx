@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { UserProvider } from "./_context/UserContext";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "divar",
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html className="dark" lang="en">
       <body className="dark:bg-black bg-white"> 
       <UserProvider>
-          <main className="mt-10 md:mt-28">{children}</main>
+          <main className="mt-10 md:mt-28"> <Suspense fallback={<div>Loading...</div>}>
+                {children}
+                  </Suspense></main>
         </UserProvider>
       </body>
     </html>
