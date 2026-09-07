@@ -2,8 +2,10 @@
 
 const page: React.FC = () => {
   return (
-   
+   <div>
+d
 {/* <ChatBoxForAd /> */}
+   </div>
   );
 };
 
