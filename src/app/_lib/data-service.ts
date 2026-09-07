@@ -711,8 +711,9 @@ export const getBuyerChats = async (userId: string) => {
   }
 
   // Filter on related field client-side
-  const filtered = data.filter(chat  => chat.ad?.userID !== userId);
-
+const filtered = data.filter(
+  (chat) => chat.ad[0]?.userID !== userId
+);
   return filtered;
 };
 
