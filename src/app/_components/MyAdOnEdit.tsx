@@ -190,6 +190,10 @@ const MyAdOnEdit: FC = () => {
       alert("Please select a location");
       return;
     }
+    if (!user?.id || !user?.email) {
+  console.error("User information is missing");
+  return;
+}
     const updatedAd = {
       title,
       description,
