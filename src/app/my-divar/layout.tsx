@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import BottomNav from "../_components/BottomNav";
 import Navbar from "../_components/Navbar";
 import { UserProvider } from "../_context/UserContext";
@@ -15,7 +16,11 @@ export default function MyDivarLayout({
     <body className="dark:bg-black bg-white"> 
     <UserProvider>
         <Navbar />
-        <main className="mt-28 px-4">{children}</main>
+        <main className="mt-28 px-4">
+        <Suspense fallback={<div>Loading...</div>}>
+      {children}
+        </Suspense>
+          </main>
         <BottomNav />
       </UserProvider> 
       </body>
