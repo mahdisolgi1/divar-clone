@@ -690,10 +690,13 @@ export const getBuyerChats = async (userId: string) => {
     .from("chats")
     .select(`
       id,
-      message,
-      created_at,
+      adID,
       senderID,
       receiverID,
+      senderEmail,
+      receiverEmail,
+      message,
+      created_at,
       ad:adID (
         id,
         title,
@@ -706,14 +709,14 @@ export const getBuyerChats = async (userId: string) => {
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error('Database error:', error);
-    throw new Error("Failed to fetch buyer chats");
+    console.error(error);
+    return [];
   }
 
-  // Filter on related field client-side
-const filtered = data.filter(
-  (chat) => chat.ad[0]?.userID !== userId
-);
+  const filtered = data.filter(
+    (chat) => chat.ad[0]?.userID !== userId
+  );
+
   return filtered;
 };
 
@@ -722,12 +725,15 @@ const filtered = data.filter(
 export const getOwnerChats = async (userId: string) => {
   const { data, error } = await supabase
     .from("chats")
-    .select(`
+     .select(`
       id,
+      adID,
       message,
       created_at,
       senderID,
       receiverID,
+      senderEmail,
+      receiverEmail,
       ad:adID (
         id,
         title,
@@ -736,6 +742,7 @@ export const getOwnerChats = async (userId: string) => {
         userID
       )
     `)
+
     .eq('ad.userID', userId)  // Changed from eq('userID', userId)
     .order("created_at", { ascending: false });
 
@@ -772,7 +779,7 @@ export const sendMessage = async (adId: number, senderEmail: string, receiverEma
 export const getAdByID = async (adId: number) => {
   const { data, error } = await supabase
     .from("ad")
-    .select("id,title,userEmail,img1")
+    .select("id,title,userEmail,img1,userID")
     .eq("id", adId)
     .single();
 

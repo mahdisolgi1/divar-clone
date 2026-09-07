@@ -62,22 +62,23 @@ export interface status {
   created_at: string;
 }
 // for chats
-
 export interface Chat {
   id: number;
   adID: number;
-  ad: {
-    id: number;
-    title: string;
-    userEmail: string;
-    img1: string;
-  };
+  message: string;
+  created_at: string;
   senderID: string;
   receiverID: string;
   senderEmail: string;
   receiverEmail: string;
-  message: string;
-  created_at: string;
+
+  ad: {
+    id: number;
+    title: string;
+    img1: string | null;
+    userEmail: string;
+    userID: string;
+  }[];
 }
 // for user
 
